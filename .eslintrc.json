@@ -1,4 +1,7 @@
 {
   "extends": ["airbnb-base", "prettier", "plugin:node/recommended"],
-  "plugins": ["prettier"]
+  "plugins": ["prettier"],
+  "rules": {
+    "class-methods-use-this": "off"
+  }
 }
