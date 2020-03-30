@@ -3,19 +3,19 @@ const {
   CommandHandler,
   InhibitorHandler,
   ListenerHandler,
-} = require("discord-akairo");
+} = require('discord-akairo');
 
 class XyraClient extends AkairoClient {
   constructor() {
     super({
-      ownerID: "628460617669410836",
+      ownerID: '628460617669410836',
     });
 
     this.commandHandler = new CommandHandler(this, {
-      directory: "./commands/",
-      ignoreCooldownID: [""],
+      directory: './commands/',
+      ignoreCooldownID: [''],
       aliasReplacement: /-/g,
-      prefix: "$$",
+      prefix: '$$',
       allowMention: true,
       commandUtil: true,
       commandUtilLifetime: 10000,
@@ -31,11 +31,11 @@ class XyraClient extends AkairoClient {
     });
 
     this.inhibitorHandler = new InhibitorHandler(this, {
-      directory: "./inhibitors/",
+      directory: './inhibitors/',
     });
 
     this.listenerHandler = new ListenerHandler(this, {
-      directory: "./listeners/",
+      directory: './listeners/',
     });
 
     this.setup();
@@ -56,8 +56,8 @@ class XyraClient extends AkairoClient {
     this.listenerHandler.loadAll();
 
     const { resolver } = this.commandHandler;
-    resolver.addType("1-10", (message, phrase) => {
-      const num = resolver.type("integer")(phrase);
+    resolver.addType('1-10', (message, phrase) => {
+      const num = resolver.type('integer')(phrase);
       if (num == null) return null;
       if (num < 1 || num > 10) return null;
       return num;
@@ -66,7 +66,7 @@ class XyraClient extends AkairoClient {
 
   async start(token) {
     await this.login(token);
-    console.log("Ready!"); // eslint-disable-line no-console
+    console.log('Ready!'); // eslint-disable-line no-console
   }
 }
 
