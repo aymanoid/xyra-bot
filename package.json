@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/zeutyx/xyra-bot/issues"
   },
-  "homepage": "https://github.com/zeutyx/xyra-bot#readme"
+  "homepage": "https://github.com/zeutyx/xyra-bot#readme",
+  "dependencies": {
+    "discord-akairo": "^8.0.0",
+    "discord.js": "^12.1.1"
+  }
 }
