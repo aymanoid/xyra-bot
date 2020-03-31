@@ -1,9 +1,9 @@
-const {
+import {
   AkairoClient,
   CommandHandler,
   InhibitorHandler,
   ListenerHandler,
-} = require('discord-akairo');
+} from 'discord-akairo';
 
 class XyraClient extends AkairoClient {
   constructor() {
@@ -62,4 +62,4 @@ class XyraClient extends AkairoClient {
   }
 }
 
-module.exports = XyraClient;
+export default XyraClient;
