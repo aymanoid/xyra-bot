@@ -37,7 +37,7 @@ class AboutCommand extends Command {
         this.client.users.cache.get(this.client.ownerID).tag,
         true
       )
-      .addField('Library', 'Eris', true)
+      .addField('Library', 'discord.js', true)
       .addField('Website', '[xyra.io](https://xyra.io)', true)
       .addField('Invite', '[xyra.io/invite](https://xyra.io/invite)', true)
       .addField('Server', '[xyra.io/server](https://xyra.io/server)', true)
