@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/zeutyx/xyra-bot#readme",
   "dependencies": {
+    "@zuzak/owo": "^1.6.0",
     "axios": "^0.19.2",
     "discord-akairo": "^8.0.0",
     "discord.js": "^12.1.1",
