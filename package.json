@@ -30,7 +30,8 @@
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.28",
-    "numeral": "^2.0.6"
+    "numeral": "^2.0.6",
+    "soap": "^0.31.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
