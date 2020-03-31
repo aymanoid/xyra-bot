@@ -20,8 +20,8 @@ class EvalCommand extends Command {
     });
   }
 
-  async exec(message, { code }) {
-    if (!code) return message.util.reply('No code provided!');
+  async exec(msg, { code }) {
+    if (!code) return msg.util.reply('No code provided!');
 
     const evaled = {};
     const logs = [];
@@ -52,7 +52,7 @@ class EvalCommand extends Command {
 
       if (evaled.output.length + code.length > 1900)
         evaled.output = 'Output too long.';
-      evaled.message.edit([
+      evaled.msg.edit([
         `📥\u2000**Input**${cb}js`,
         code,
         cb,
@@ -76,7 +76,7 @@ class EvalCommand extends Command {
 
       if (output.length + code.length > 1900) output = 'Output too long.';
 
-      const sent = await message.util.send([
+      const sent = await msg.util.send([
         `📥\u2000**Input**${cb}js`,
         code,
         cb,
@@ -85,7 +85,7 @@ class EvalCommand extends Command {
         cb,
       ]);
 
-      evaled.message = sent;
+      evaled.msg = sent;
       evaled.errored = false;
       evaled.output = output;
 
@@ -100,7 +100,7 @@ class EvalCommand extends Command {
       }`;
       error = error.replace(tokenRegex, '[TOKEN]');
 
-      const sent = await message.util.send([
+      const sent = await msg.util.send([
         `📥\u2000**Input**${cb}js`,
         code,
         cb,
@@ -109,7 +109,7 @@ class EvalCommand extends Command {
         cb,
       ]);
 
-      evaled.message = sent;
+      evaled.msg = sent;
       evaled.errored = true;
       evaled.output = error;
 
