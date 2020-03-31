@@ -54,14 +54,6 @@ class XyraClient extends AkairoClient {
     this.commandHandler.loadAll();
     this.inhibitorHandler.loadAll();
     this.listenerHandler.loadAll();
-
-    const { resolver } = this.commandHandler;
-    resolver.addType('1-10', (message, phrase) => {
-      const num = resolver.type('integer')(phrase);
-      if (num == null) return null;
-      if (num < 1 || num > 10) return null;
-      return num;
-    });
   }
 
   async start(token) {
