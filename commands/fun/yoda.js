@@ -10,7 +10,7 @@ class YodaCommand extends Command {
           'Converts the given text to Yoda-speak, or the message above yours if no text was given.',
         usage: '[text]',
       },
-      category: 'Core',
+      category: 'Fun',
       args: [
         {
           id: 'text',

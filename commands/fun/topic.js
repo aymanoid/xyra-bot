@@ -10,7 +10,7 @@ class TopicCommand extends Command {
       description: {
         content: 'Gives a random conversation topic.',
       },
-      category: 'Core',
+      category: 'Fun',
     });
   }
 

@@ -7,7 +7,7 @@ class RapeCommand extends Command {
       description: {
         content: 'An actual useless command (tag a person to rape).',
       },
-      category: 'Core',
+      category: 'Fun',
       args: [
         {
           id: 'member',
