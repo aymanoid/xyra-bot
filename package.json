@@ -24,6 +24,7 @@
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "moment": "^2.24.0",
+    "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.28",
     "numeral": "^2.0.6"
   },
