@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import moment from 'moment-timezone';
-import XyraClient from './client';
+import XyraClient from './struct/XyraClient';
 
 moment.tz.setDefault('UTC');
 
