@@ -4,12 +4,23 @@ import {
   InhibitorHandler,
   ListenerHandler,
 } from 'discord-akairo';
+import Logger from '../util/Logger';
 
 class XyraClient extends AkairoClient {
-  constructor() {
-    super({
-      ownerID: '628460617669410836',
-    });
+  constructor(config) {
+    super(
+      {
+        ownerID: '628460617669410836',
+      },
+      {
+        messageCacheMaxSize: 50,
+        messageCacheLifetime: 300,
+        messageSweepInterval: 900,
+        disableEveryone: true,
+        disabledEvents: ['TYPING_START'],
+        partials: ['MESSAGE'],
+      }
+    );
 
     this.commandHandler = new CommandHandler(this, {
       directory: './commands/',
@@ -22,6 +33,7 @@ class XyraClient extends AkairoClient {
       commandUtilSweepInterval: 10000,
       storeMessages: true,
       handleEdits: true,
+      defaultCooldown: 2500,
       argumentDefaults: {
         prompt: {
           retries: 0,
@@ -55,9 +67,9 @@ class XyraClient extends AkairoClient {
     this.listenerHandler.loadAll();
   }
 
-  async start(token) {
-    await this.login(token);
-    console.log('Ready!'); // eslint-disable-line no-console
+  async start() {
+    Logger.info('Ready!');
+    return this.login(process.env.TOKEN);
   }
 }
 
