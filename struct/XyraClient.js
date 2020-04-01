@@ -7,7 +7,7 @@ import {
 import Logger from '../util/Logger';
 
 class XyraClient extends AkairoClient {
-  constructor(config) {
+  constructor() {
     super(
       {
         ownerID: '628460617669410836',
