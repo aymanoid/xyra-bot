@@ -7,7 +7,7 @@ class EmojiCommand extends Command {
       aliases: ['emoji', 'enlarge'],
       description: {
         content: 'Enlarges an emoji.',
-        usage: '[emoji]',
+        usage: '<emoji>',
       },
       category: 'Core',
       clientPermissions: ['EMBED_LINKS'],

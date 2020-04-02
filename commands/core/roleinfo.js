@@ -8,7 +8,7 @@ class RoleInfoCommand extends Command {
       aliases: ['roleinfo', 'rinfo'],
       description: {
         content: 'Gets information about a role.',
-        usage: '[role]',
+        usage: '<role>',
       },
       category: 'Core',
       channel: 'guild',
