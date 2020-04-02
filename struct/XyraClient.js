@@ -39,7 +39,13 @@ class XyraClient extends AkairoClient {
       defaultCooldown: 2500,
       argumentDefaults: {
         prompt: {
-          retries: 0,
+          start: 'start message.',
+          retry: 'retry message.',
+          timeout: 'Time ran out, command has been cancelled.',
+          ended: 'Too many retries, command has been cancelled.',
+          cancel: 'Command has been cancelled.',
+          retries: 1,
+          time: 30000,
         },
         modifyOtherwise: (msg, text) => `${msg.author}, ${text}`,
       },
