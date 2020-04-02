@@ -6,10 +6,11 @@ class PrefixCommand extends Command {
       aliases: ['prefix'],
       description: {
         content: 'Shows the current prefix, or sets a new one.',
-        usage: '[emoji]',
+        usage: '[prefix]',
       },
       category: 'Core',
-      clientPermissions: ['EMBED_LINKS'],
+      channel: 'guild',
+      clientPermissions: ['MANAGE_GUILD'],
       args: [
         {
           id: 'prefix',
