@@ -12,6 +12,7 @@ class UserInfoCommand extends Command {
         usage: '[member]',
       },
       category: 'Core',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [
         {

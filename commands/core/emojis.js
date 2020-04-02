@@ -9,6 +9,7 @@ class EmojisCommand extends Command {
         content: 'Gets a list of the emotes in a server.',
       },
       category: 'Core',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
     });
   }

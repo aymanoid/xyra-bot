@@ -9,6 +9,7 @@ class SplashCommand extends Command {
         content: 'Displays the server splash image.',
       },
       category: 'Core',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
     });
   }

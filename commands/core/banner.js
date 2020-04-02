@@ -9,6 +9,7 @@ class BannerCommand extends Command {
         content: 'Displays the server banner image.',
       },
       category: 'Core',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
     });
   }

@@ -12,6 +12,7 @@ class ChannelInfoCommand extends Command {
         usage: '[channel]',
       },
       category: 'Core',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [
         {

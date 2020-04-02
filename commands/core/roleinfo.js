@@ -11,6 +11,7 @@ class RoleInfoCommand extends Command {
         usage: '[role]',
       },
       category: 'Core',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [
         {
