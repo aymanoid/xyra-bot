@@ -1,6 +1,6 @@
-import chalk from 'chalk';
-import moment from 'moment';
-import util from 'util';
+const chalk = require('chalk');
+const moment = require('moment');
+const util = require('util');
 
 class Logger {
   static log(content, { color = 'grey', tag = 'Log' } = {}) {
@@ -40,4 +40,4 @@ class Logger {
   }
 }
 
-export default Logger;
+module.exports = Logger;
