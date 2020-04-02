@@ -14,18 +14,17 @@ class AboutCommand extends Command {
   }
 
   async exec(msg) {
-    const currGuild = msg.guild;
-    const botColor = currGuild.me.displayColor;
-    const avatarURL = currGuild.me.user.displayAvatarURL({
+    const embedColor = msg.guild ? msg.guild.me.displayColor : 16777215;
+    const avatarURL = this.client.user.displayAvatarURL({
       format: 'png',
       dynamic: true,
       size: 2048,
     });
 
     const aboutEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setAuthor(
-        `${currGuild.me.user.username} v${process.env.npm_package_version}`,
+        `${this.client.user.username} v${process.env.npm_package_version}`,
         avatarURL
       )
       .setDescription(

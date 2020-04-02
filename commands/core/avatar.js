@@ -11,6 +11,7 @@ class AvatarCommand extends Command {
         examples: ['@Ayman', '628460617669410836', 'server'],
       },
       category: 'Core',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [
         {
@@ -25,7 +26,7 @@ class AvatarCommand extends Command {
 
   async exec(msg, args) {
     const currGuild = msg.guild;
-    const botColor = currGuild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
 
     let isGuild = false;
     let iconURL;
@@ -50,7 +51,7 @@ class AvatarCommand extends Command {
     }
 
     const iconEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setTitle(isGuild ? 'Icon URL' : 'Avatar URL')
       .setURL(iconURL)
       .setAuthor(isGuild ? currGuild.name : trgMember.user.tag, iconURL)

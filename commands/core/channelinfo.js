@@ -26,8 +26,7 @@ class ChannelInfoCommand extends Command {
   }
 
   async exec(msg, args) {
-    const currGuild = msg.guild;
-    const botColor = currGuild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
     const trgChannel = args.channel;
 
     const channelCategory = trgChannel.parent ? trgChannel.parent.name : 'None';
@@ -50,7 +49,7 @@ class ChannelInfoCommand extends Command {
     }[trgChannel.type];
 
     const channelInfoEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setTitle(trgChannel.name)
       .addField('ID', trgChannel.id, true)
       .addField('Mention', `\`${trgChannel.toString()}\``, true);

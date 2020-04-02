@@ -17,7 +17,7 @@ class EmojisCommand extends Command {
   async exec(msg) {
     const currGuild = msg.guild;
     const currEmojis = currGuild.emojis.cache.array();
-    const botColor = currGuild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
 
     const iconURL = currGuild.iconURL({
       format: 'png',
@@ -38,7 +38,7 @@ class EmojisCommand extends Command {
       }
     }
     const emotesEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setAuthor(currGuild.name, iconURL)
       .setTitle(
         `${currEmojis.filter((e) => !e.animated).length} Static, ${
@@ -52,7 +52,7 @@ class EmojisCommand extends Command {
     if (chks.length > 1) {
       for (let i = 1; i < chks.length; i += 1) {
         const embed = new MessageEmbed()
-          .setColor(botColor || 16777215)
+          .setColor(embedColor)
           .setDescription(chks[i]);
         msg.channel.send(embed);
       }

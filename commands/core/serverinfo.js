@@ -17,7 +17,7 @@ class ServerInfoCommand extends Command {
 
   async exec(msg) {
     const currGuild = msg.guild;
-    const botColor = currGuild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
 
     const iconURL = currGuild.iconURL({
       format: 'png',
@@ -56,7 +56,7 @@ class ServerInfoCommand extends Command {
       }[currGuild.region] || currGuild.region;
 
     const serverInfoEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setAuthor(currGuild.name, iconURL)
       .addField('Owner', currGuild.owner.user.tag, true)
       .addField('Region', serverRegion, true)

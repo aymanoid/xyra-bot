@@ -16,7 +16,7 @@ class SplashCommand extends Command {
 
   async exec(msg) {
     const currGuild = msg.guild;
-    const botColor = currGuild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
     const splashURL = currGuild.splashURL({
       format: 'png',
       dynamic: true,
@@ -32,7 +32,7 @@ class SplashCommand extends Command {
       return msg.channel.send(`This server has no splash image set.`);
 
     const splashEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setTitle('Splash URL')
       .setURL(splashURL)
       .setAuthor(currGuild.name, iconURL)

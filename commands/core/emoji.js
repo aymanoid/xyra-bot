@@ -10,6 +10,7 @@ class EmojiCommand extends Command {
         usage: '<emoji>',
       },
       category: 'Core',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [
         {
@@ -24,11 +25,12 @@ class EmojiCommand extends Command {
     if (!args.emoji || (args.emoji.custom && !args.emoji.valid))
       return msg.channel.send('No valid emoji was provided.');
 
-    const botColor = msg.guild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
+
     const trgEmoji = args.emoji;
 
     const emojiEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setTitle(trgEmoji.name)
       .setURL(trgEmoji.url)
       .setImage(trgEmoji.url);

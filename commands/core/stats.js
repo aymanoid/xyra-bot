@@ -15,10 +15,9 @@ class StatsCommand extends Command {
   }
 
   async exec(msg) {
-    const currGuild = msg.guild;
-    const botColor = currGuild.me.displayColor;
+    const embedColor = msg.guild ? msg.guild.me.displayColor : 16777215;
 
-    const avatarURL = currGuild.me.user.displayAvatarURL({
+    const avatarURL = this.client.user.displayAvatarURL({
       format: 'png',
       dynamic: true,
       size: 2048,
@@ -29,9 +28,9 @@ class StatsCommand extends Command {
       .format('d [days], h [hours], m [minutes], s [seconds]', { largest: 3 });
 
     const statsEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
-      .setAuthor(currGuild.me.user.username, avatarURL)
-      .setTitle(`${currGuild.me.user.username} Statistics`)
+      .setColor(embedColor)
+      .setAuthor(this.client.user.username, avatarURL)
+      .setTitle(`${this.client.user.username} Statistics`)
       .addField('Guilds', this.client.guilds.cache.size.toLocaleString(), true)
       .addField(
         'Channels',

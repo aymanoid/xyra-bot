@@ -14,10 +14,10 @@ class InviteCommand extends Command {
   }
 
   async exec(msg) {
-    const botColor = msg.guild.me.displayColor;
+    const embedColor = msg.guild ? msg.guild.me.displayColor : 16777215;
 
     const inviteEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setDescription(
         "Here's the invite link: [xyra.io/invite](https://xyra.io/invite)"
       );

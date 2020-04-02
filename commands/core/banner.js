@@ -16,7 +16,7 @@ class BannerCommand extends Command {
 
   async exec(msg) {
     const currGuild = msg.guild;
-    const botColor = currGuild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
     const bannerURL = currGuild.bannerURL({
       format: 'png',
       dynamic: true,
@@ -32,7 +32,7 @@ class BannerCommand extends Command {
       return msg.channel.send(`This server has no banner image set.`);
 
     const bannerEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setTitle('Banner URL')
       .setURL(bannerURL)
       .setAuthor(currGuild.name, iconURL)

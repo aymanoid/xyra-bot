@@ -27,7 +27,7 @@ class UserInfoCommand extends Command {
 
   async exec(msg, args) {
     const currGuild = msg.channel.guild;
-    const botColor = currGuild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
     const trgMember = args.member;
 
     const joinPosition = trgMember.user.bot
@@ -109,7 +109,7 @@ class UserInfoCommand extends Command {
     const status = `${statusIcon} ${trgMemberActivity || statusText}`;
 
     const userInfoEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setAuthor(
         trgMember.user.tag +
           (trgMember.nickname ? ` | ${trgMember.nickname}` : ''),

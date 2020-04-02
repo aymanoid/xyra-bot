@@ -27,8 +27,7 @@ class ActivityCommand extends Command {
   }
 
   async exec(msg, args) {
-    const currGuild = msg.guild;
-    const botColor = currGuild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
     const trgMember = args.member;
 
     const imgOpts = { format: 'png', dynamic: true, size: 2048 };
@@ -46,7 +45,7 @@ class ActivityCommand extends Command {
     const gameInfoEmbeds = [];
     activities.forEach((trgGame) => {
       const gameInfoEmbed = new MessageEmbed()
-        .setColor(botColor || 16777215)
+        .setColor(embedColor)
         .setFooter(trgMember.user.tag, avatarURL);
 
       switch (trgGame.type) {
