@@ -45,6 +45,32 @@ class XyraClient extends AkairoClient {
       },
     });
 
+    // CUSTOM TYPES
+    this.commandHandler.resolver.addType('emojiThingy', (message, phrase) => {
+      if (!phrase) return null;
+      const mention = phrase.match(/<(a?):(\w+):(\d+)>$/);
+      if (!mention) return null;
+      const emojiObj = {
+        id: mention[3],
+        name: mention[2],
+        animated: !!mention[1],
+        custom: true,
+        url: `https://cdn.discordapp.com/emojis/${mention[3]}.${
+          mention[1] ? 'gif' : 'png'
+        }?v=1`,
+      };
+
+      let urlStatus;
+      // eslint-disable-next-line global-require
+      require('axios')({ url: emojiObj.url, method: 'HEAD' }).then(
+        // eslint-disable-next-line no-return-assign
+        (r) => (urlStatus = r.status)
+      );
+      emojiObj.valid = urlStatus !== 404;
+
+      return emojiObj;
+    });
+
     this.inhibitorHandler = new InhibitorHandler(this, {
       directory: './inhibitors/',
     });
