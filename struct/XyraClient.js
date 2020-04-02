@@ -5,6 +5,9 @@ import {
   ListenerHandler,
 } from 'discord-akairo';
 import Logger from '../util/Logger';
+import Database from './Database';
+import SettingsProvider from './SettingsProviders';
+import Setting from '../models/settings';
 
 class XyraClient extends AkairoClient {
   constructor() {
@@ -26,7 +29,7 @@ class XyraClient extends AkairoClient {
       directory: './commands/',
       ignoreCooldownID: [''],
       aliasReplacement: /-/g,
-      prefix: '$$',
+      prefix: (message) => this.settings.get(message.guild, 'prefix', '$$'),
       allowMention: true,
       commandUtil: true,
       commandUtilLifetime: 10000,
@@ -50,6 +53,8 @@ class XyraClient extends AkairoClient {
       directory: './listeners/',
     });
 
+    this.settings = new SettingsProvider(Setting);
+
     this.setup();
   }
 
@@ -69,6 +74,8 @@ class XyraClient extends AkairoClient {
 
   async start() {
     Logger.info('Ready!');
+    await Database.authenticate();
+    await this.settings.init();
     return this.login(process.env.TOKEN);
   }
 }
