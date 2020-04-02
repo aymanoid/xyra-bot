@@ -47,7 +47,8 @@ class XyraClient extends AkairoClient {
           retries: 1,
           time: 30000,
         },
-        modifyOtherwise: (msg, text) => `${msg.author}, ${text}`,
+        modifyOtherwise: (msg, text) =>
+          typeof text === 'object' ? text : `${msg.author}, ${text}`,
       },
     });
 
