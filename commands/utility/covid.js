@@ -12,6 +12,7 @@ class CovidCommand extends Command {
         usage: '[country | state | top]',
       },
       category: 'utility',
+      clientPermissions: ['EMBED_LINKS'],
       args: [
         {
           id: 'text',
