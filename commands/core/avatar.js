@@ -8,7 +8,7 @@ class AvatarCommand extends Command {
       description: {
         content: 'Displays the avatar of a member.',
         usage: '[member]',
-        examples: ['@Ayman', '628460617669410836', 'server'],
+        examples: ['', '@User', 'server'],
       },
       category: 'Core',
       channel: 'guild',
