@@ -9,7 +9,7 @@ class CovidCommand extends Command {
       aliases: ['covid', 'coronavirus', 'corona', 'cv'],
       description: {
         content: 'Returns general COVID-19 stats.',
-        usage: '[country | top]',
+        usage: '[country | state | top]',
       },
       category: 'Utility',
       args: [
@@ -47,20 +47,34 @@ class CovidCommand extends Command {
         return msg.channel.send(covidEmbed);
       }
       data = await track.countries(args.text);
-      // if (data.message) data = await track.states(args.text);
-      if (!data || data.message)
-        return msg.channel.send("Country not found or doesn't have any cases.");
+      if (!data || data.message) {
+        const statesData = await track.states();
+        data = statesData.filter((obj) => {
+          return obj.state.toLowerCase() === args.text.toLowerCase();
+        });
+        if (!data || data.message || !data.length)
+          return msg.channel.send(
+            "Country or state not found or doesn't have any cases."
+          );
+        [data] = data;
+      }
     } else {
       data = await track.all();
     }
 
-    const type = data.country ? `${data.country} (Country)` : 'Global';
+    // eslint-disable-next-line no-nested-ternary
+    const type = data.country
+      ? `${data.country} (Country)`
+      : data.state
+      ? `${data.state} (State)`
+      : 'Global';
 
     const cases = data.cases.toLocaleString();
     const deaths = `${data.deaths.toLocaleString()} (${(
       (100 * data.deaths) /
       data.cases
     ).toFixed(2)}%)`;
+    data.recovered = data.recovered || data.cases - (data.deaths + data.active);
     const recovered = `${data.recovered.toLocaleString()} (${(
       (100 * data.recovered) /
       data.cases
@@ -98,6 +112,13 @@ class CovidCommand extends Command {
         .addField('Today Cases', todayCases, true)
         .addField('Today Deaths', todayDeaths, true)
         .addField('Deaths per million', deathsPerOneMillion, true);
+    }
+    if (data.state) {
+      const { todayCases } = data;
+      const { todayDeaths } = data;
+      covidEmbed
+        .addField('Today Cases', todayCases, true)
+        .addField('Today Deaths', todayDeaths, true);
     }
 
     covidEmbed
