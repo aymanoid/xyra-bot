@@ -10,7 +10,7 @@ class PokeCommand extends Command {
         content: 'Poke someone.',
         usage: '<member>',
       },
-      category: 'Reactions',
+      category: 'reactions',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

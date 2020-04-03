@@ -8,7 +8,7 @@ class SayCommand extends Command {
         content: 'Returns the given text.',
         usage: '[text]',
       },
-      category: 'Private',
+      category: 'private',
       ownerOnly: true,
       quoted: false,
       args: [

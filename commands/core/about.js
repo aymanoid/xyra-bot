@@ -8,7 +8,7 @@ class AboutCommand extends Command {
       description: {
         content: 'Displays information about the bot.',
       },
-      category: 'Core',
+      category: 'core',
       clientPermissions: ['EMBED_LINKS'],
     });
   }

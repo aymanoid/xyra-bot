@@ -8,7 +8,7 @@ class PrefixCommand extends Command {
         content: 'Shows the current prefix, or sets a new one.',
         usage: '[prefix]',
       },
-      category: 'Core',
+      category: 'core',
       channel: 'guild',
       clientPermissions: ['MANAGE_GUILD'],
       args: [

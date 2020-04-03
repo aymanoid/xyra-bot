@@ -10,7 +10,7 @@ class OwOifyCommand extends Command {
           'OwOifies the given text, or the message above yours if no text was given.',
         usage: '[text]',
       },
-      category: 'Fun',
+      category: 'fun',
       args: [
         {
           id: 'text',

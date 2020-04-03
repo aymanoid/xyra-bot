@@ -10,7 +10,7 @@ class PatCommand extends Command {
         content: 'Pat someone.',
         usage: '<member>',
       },
-      category: 'Reactions',
+      category: 'reactions',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

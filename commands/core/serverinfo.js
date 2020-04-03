@@ -9,7 +9,7 @@ class ServerInfoCommand extends Command {
       description: {
         content: 'Gets information about the server.',
       },
-      category: 'Core',
+      category: 'core',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
     });

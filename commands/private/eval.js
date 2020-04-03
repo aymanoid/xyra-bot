@@ -8,7 +8,7 @@ class EvalCommand extends Command {
       description: {
         content: 'Evaluates javascript code.',
       },
-      category: 'Private',
+      category: 'private',
       ownerOnly: true,
       quoted: false,
       args: [

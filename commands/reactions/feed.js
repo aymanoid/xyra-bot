@@ -10,7 +10,7 @@ class FeedCommand extends Command {
         content: 'Feed someone.',
         usage: '<member>',
       },
-      category: 'Reactions',
+      category: 'reactions',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

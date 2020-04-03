@@ -11,7 +11,7 @@ class CovidCommand extends Command {
         content: 'Returns general COVID-19 stats.',
         usage: '[country | state | top]',
       },
-      category: 'Utility',
+      category: 'utility',
       args: [
         {
           id: 'text',

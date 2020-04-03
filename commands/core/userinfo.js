@@ -11,7 +11,7 @@ class UserInfoCommand extends Command {
         content: 'Gets information about a member.',
         usage: '[member]',
       },
-      category: 'Core',
+      category: 'core',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

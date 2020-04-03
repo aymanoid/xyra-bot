@@ -10,7 +10,7 @@ class KissCommand extends Command {
         content: 'Kiss someone.',
         usage: '<member>',
       },
-      category: 'Reactions',
+      category: 'reactions',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

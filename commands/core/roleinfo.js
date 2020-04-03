@@ -10,7 +10,7 @@ class RoleInfoCommand extends Command {
         content: 'Gets information about a role.',
         usage: '<role>',
       },
-      category: 'Core',
+      category: 'core',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

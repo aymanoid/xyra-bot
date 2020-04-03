@@ -8,7 +8,7 @@ class NicknameCommand extends Command {
       description: {
         content: 'Gives you a random nickname.',
       },
-      category: 'Fun',
+      category: 'fun',
       clientPermissions: ['EMBED_LINKS'],
     });
   }

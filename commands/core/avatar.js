@@ -10,7 +10,7 @@ class AvatarCommand extends Command {
         usage: '[member]',
         examples: ['', '@User', 'server'],
       },
-      category: 'Core',
+      category: 'core',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

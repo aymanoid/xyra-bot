@@ -10,7 +10,7 @@ class SlapCommand extends Command {
         content: 'Slap someone.',
         usage: '<member>',
       },
-      category: 'Reactions',
+      category: 'reactions',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

@@ -7,7 +7,7 @@ class PingCommand extends Command {
       description: {
         content: 'idk what this cmd actually does.',
       },
-      category: 'Core',
+      category: 'core',
       ratelimit: 2,
     });
   }

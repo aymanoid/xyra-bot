@@ -8,7 +8,7 @@ class KayneWestCommand extends Command {
       description: {
         content: 'Gives a random Kayne West quote.',
       },
-      category: 'Fun',
+      category: 'fun',
     });
   }
 

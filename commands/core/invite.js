@@ -8,7 +8,7 @@ class InviteCommand extends Command {
       description: {
         content: 'Gives you an invite link for the bot.',
       },
-      category: 'Core',
+      category: 'core',
       clientPermissions: ['EMBED_LINKS'],
     });
   }
