@@ -58,6 +58,11 @@ class XyraClient extends AkairoClient {
       return this.commandHandler.findCategory(phrase) || null;
     });
 
+    this.commandHandler.resolver.addType('attachment', (message) => {
+      if (!message.attachments.size) return null;
+      return message.attachments.array()[0] || null;
+    });
+
     this.commandHandler.resolver.addType('emojiThingy', (message, phrase) => {
       if (!phrase) return null;
       const mention = phrase.match(/<(a?):(\w+):(\d+)>$/);
