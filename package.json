@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/zeutyx/xyra-bot#readme",
   "dependencies": {
+    "@sentry/node": "^5.15.4",
     "@zuzak/owo": "^1.6.0",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
