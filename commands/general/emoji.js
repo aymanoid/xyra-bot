@@ -9,7 +9,7 @@ class EmojiCommand extends Command {
         content: 'Enlarges an emoji.',
         usage: '<emoji>',
       },
-      category: 'core',
+      category: 'general',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

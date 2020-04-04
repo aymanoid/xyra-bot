@@ -12,7 +12,7 @@ class ColorCommand extends Command {
         usage: '[color]',
         examples: ['', 'e91e63', '#9b59b6'],
       },
-      category: 'core',
+      category: 'general',
       clientPermissions: ['EMBED_LINKS'],
       args: [
         {

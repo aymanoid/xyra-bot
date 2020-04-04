@@ -9,7 +9,7 @@ class StatsCommand extends Command {
       description: {
         content: 'Displays some bot statistics.',
       },
-      category: 'core',
+      category: 'general',
       clientPermissions: ['EMBED_LINKS'],
     });
   }

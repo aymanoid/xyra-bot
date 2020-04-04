@@ -12,7 +12,7 @@ class ActivityCommand extends Command {
         content: 'Gets information about the activity of a member.',
         usage: '[member]',
       },
-      category: 'core',
+      category: 'general',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

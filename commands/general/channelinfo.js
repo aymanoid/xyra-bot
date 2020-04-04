@@ -11,7 +11,7 @@ class ChannelInfoCommand extends Command {
         content: 'Gets information about a channel.',
         usage: '[channel]',
       },
-      category: 'core',
+      category: 'general',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [

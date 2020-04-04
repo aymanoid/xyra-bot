@@ -1,14 +1,14 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
 
-class BannerCommand extends Command {
+class SplashCommand extends Command {
   constructor() {
-    super('banner', {
-      aliases: ['banner'],
+    super('splash', {
+      aliases: ['splash'],
       description: {
-        content: 'Displays the server banner image.',
+        content: 'Displays the server splash image.',
       },
-      category: 'core',
+      category: 'general',
       channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
     });
@@ -17,7 +17,7 @@ class BannerCommand extends Command {
   async exec(msg) {
     const currGuild = msg.guild;
     const embedColor = msg.guild.me.displayColor;
-    const bannerURL = currGuild.bannerURL({
+    const splashURL = currGuild.splashURL({
       format: 'png',
       dynamic: true,
       size: 2048,
@@ -28,18 +28,18 @@ class BannerCommand extends Command {
       size: 2048,
     });
 
-    if (!bannerURL)
-      return msg.channel.send(`This server has no banner image set.`);
+    if (!splashURL)
+      return msg.channel.send(`This server has no splash image set.`);
 
-    const bannerEmbed = new MessageEmbed()
+    const splashEmbed = new MessageEmbed()
       .setColor(embedColor)
-      .setTitle('Banner URL')
-      .setURL(bannerURL)
+      .setTitle('Splash URL')
+      .setURL(splashURL)
       .setAuthor(currGuild.name, iconURL)
-      .setImage(bannerURL);
+      .setImage(splashURL);
 
-    return msg.channel.send(bannerEmbed);
+    return msg.channel.send(splashEmbed);
   }
 }
 
-export default BannerCommand;
+export default SplashCommand;
