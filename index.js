@@ -1,11 +1,16 @@
 import 'dotenv/config';
 import moment from 'moment-timezone';
+import * as Sentry from '@sentry/node';
 import XyraClient from './struct/XyraClient';
 import Logger from './util/Logger';
 
 moment.tz.setDefault('UTC');
 
 const client = new XyraClient(process.env);
+
+if (process.env.SENTRY_KEY) {
+  Sentry.init({ dsn: process.env.SENTRY_KEY });
+}
 
 client
   .on('disconnect', () => Logger.warn('Connection lost...'))
