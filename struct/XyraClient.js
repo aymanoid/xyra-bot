@@ -119,7 +119,7 @@ class XyraClient extends AkairoClient {
     Logger.info('Ready!');
     await Database.authenticate();
     await this.settings.init();
-    return this.login(process.env.TOKEN);
+    return this.login(process.env.BOT_TOKEN);
   }
 }
 

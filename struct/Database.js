@@ -4,7 +4,10 @@ const path = require('path');
 const readdir = require('util').promisify(require('fs').readdir);
 const Logger = require('../util/Logger');
 
-const db = new Sequelize(process.env.DBURL, { logging: false });
+const db = new Sequelize(
+  `postgres://postgres:${process.env.POSTGRES_PASSWORD}@127.0.0.1:5432/xyra-db`,
+  { logging: false }
+);
 
 class Database {
   static get db() {
