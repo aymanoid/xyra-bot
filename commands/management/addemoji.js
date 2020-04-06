@@ -61,9 +61,9 @@ class AddEmojiCommand extends Command {
         );
       if (imageInfo.headers['content-length'] >= 256000)
         return msg.channel.send(`Emoji image must be under 256kb in size.`);
-      const filename = path.parse(emojiURL).name;
-      emojiName =
-        args.name || args.emoji.valid ? args.emoji.name : filename || 'emoji';
+      let filename = path.parse(emojiURL).name;
+      filename = filename.match(/^[a-z0-9_]{2,32}$/i) ? filename : 'emoji';
+      emojiName = args.name || (args.emoji.valid ? args.emoji.name : filename);
 
       const finalMsg = await msg.channel.send(
         'Adding the emoji, please wait...'
@@ -73,7 +73,7 @@ class AddEmojiCommand extends Command {
       try {
         emoji = await msg.guild.emojis.create(emojiURL, emojiName);
       } catch (e) {
-        return msg.channel.send('Adding the emoji failed successfully.');
+        return msg.channel.send('There was an error adding the emoji.');
       }
 
       return finalMsg.edit(
