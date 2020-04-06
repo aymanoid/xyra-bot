@@ -12,6 +12,7 @@ class HelpCommand extends Command {
         examples: ['', 'general', 'avatar'],
       },
       category: 'general',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
       args: [
         {
@@ -24,7 +25,7 @@ class HelpCommand extends Command {
 
   async exec(msg, args) {
     let helpEmbed = new MessageEmbed();
-    const { prefix } = msg.util.parsed;
+    const currPrefix = this.client.settings.get(msg.guild, 'prefix', '$$');
     if (!args.text) {
       const embedColor = msg.guild ? msg.guild.me.displayColor : null;
       const cmdCount = (categoryID) =>
@@ -39,42 +40,43 @@ class HelpCommand extends Command {
         cmdCount('management');
       helpEmbed
         .setTitle('Xyra Command List')
+        .setDescription(`The prefix for ${msg.guild.name} is \`${currPrefix}\``)
         .setColor(embedColor)
         .addField(
           `General (${cmdCount('general')})`,
-          `\`${prefix}help general\``,
+          `\`${currPrefix}help general\``,
           true
         )
         .addField(
           `Utility (${cmdCount('utility')})`,
-          `\`${prefix}help utility\``,
+          `\`${currPrefix}help utility\``,
           true
         )
-        .addField(`Fun (${cmdCount('fun')})`, `\`${prefix}help fun\``, true)
+        .addField(`Fun (${cmdCount('fun')})`, `\`${currPrefix}help fun\``, true)
         .addField(
           `Reactions (${cmdCount('reactions')})`,
-          `\`${prefix}help reactions\``,
+          `\`${currPrefix}help reactions\``,
           true
         )
         .addField(
           `Animals (${cmdCount('animals')})`,
-          `\`${prefix}help animals\``,
+          `\`${currPrefix}help animals\``,
           true
         )
         .addField(
           `Images (${cmdCount('images')})`,
-          `\`${prefix}help images\``,
+          `\`${currPrefix}help images\``,
           true
         )
         .addField(
           `Management (${cmdCount('management')})`,
-          `\`${prefix}help management\``,
+          `\`${currPrefix}help management\``,
           true
         )
         .setFooter(`There's a total of ${totalCount} commands currently.`);
     } else if (!args.text.categoryID) {
       helpEmbed
-        .setTitle(`${args.text.id} Commands`)
+        .setTitle(`${args.text.id} commands`)
         .setDescription(
           `\`${args.text.map((cmd) => cmd.aliases[0]).join('` `')}\``
         );
