@@ -15,7 +15,7 @@ class EmojiCommand extends Command {
       args: [
         {
           id: 'emoji',
-          type: Argument.union('emoji', 'emojiThingy'),
+          type: Argument.union('emoji', 'emojiMentionG'),
         },
       ],
     });

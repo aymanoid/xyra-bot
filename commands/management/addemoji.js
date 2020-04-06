@@ -23,7 +23,7 @@ class AddEmojiCommand extends Command {
       args: [
         {
           id: 'emoji',
-          type: Argument.union('emojiThingy', 'url', 'attachment'),
+          type: Argument.union('emojiMentionG', 'url', 'attachment'),
           otherwise: (msg) =>
             CommandHelp(msg.util.parsed.command, msg, this.client.user),
         },
