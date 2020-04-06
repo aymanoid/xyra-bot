@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  bot:
+    image: 'zeutyx/xyra-bot'
+    container_name: 'xyra-bot'
+    restart: always
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    links:
+      - db
+  db:
+    image: 'postgres'
+    container_name: 'xyra-db'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=xyra-db
+    volumes:
+      - ./postgres-volume:/data/db
+    ports:
+      - '5432:5432'
+  watchtower:
+    image: 'containrrr/watchtower'
+    container_name: 'watchtower'
+    restart: always
+    environment:
+      - REPO_USER=${REPO_USER}
+      - REPO_PASS=${REPO_PASS}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup true xyra-bot
