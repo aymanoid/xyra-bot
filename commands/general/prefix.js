@@ -32,10 +32,8 @@ class PrefixCommand extends Command {
 
   async exec(msg, { prefix }) {
     if (!prefix) {
-      const currentPrefix = this.client.settings.get(msg.guild, 'prefix');
-      return msg.channel.send(
-        `The prefix of this server is \`${currentPrefix}\``
-      );
+      const currPrefix = this.client.settings.get(msg.guild, 'prefix', '$$');
+      return msg.channel.send(`The prefix of this server is \`${currPrefix}\``);
     }
     await this.client.settings.set(msg.guild, 'prefix', prefix);
     if (prefix === '$$')
