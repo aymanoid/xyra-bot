@@ -1,6 +1,7 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
+import { EMOJIS } from '../../util/Constants';
 
 class RoleInfoCommand extends Command {
   constructor() {
@@ -24,7 +25,8 @@ class RoleInfoCommand extends Command {
   }
 
   async exec(msg, args) {
-    if (!args.role) return msg.channel.send('No role was provided.');
+    if (!args.role)
+      return msg.channel.send(`${EMOJIS.ERROR} No role was provided.`);
 
     const trgRole = args.role;
 

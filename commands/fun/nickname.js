@@ -1,4 +1,5 @@
 import { Command } from 'discord-akairo';
+import { EMOJIS } from '../../util/Constants';
 import * as nicks from '../../assets/arrays/nicks.json';
 
 class NicknameCommand extends Command {
@@ -24,8 +25,11 @@ class NicknameCommand extends Command {
 
     try {
       await trgMember.setNicknem(nick);
-    } catch {
-      return msg.channel.send(`There was an error changing your nickname.`);
+    } catch (err) {
+      msg.channel.send(
+        `${EMOJIS.ERROR} There was an error changing your nickname.`
+      );
+      throw err;
     }
 
     return msg.channel.send(`I changed your nickname to **\`${nick}\`**`);

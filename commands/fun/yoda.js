@@ -1,5 +1,6 @@
 import { Command } from 'discord-akairo';
 import * as soap from 'soap';
+import { EMOJIS } from '../../util/Constants';
 
 class YodaCommand extends Command {
   constructor() {
@@ -46,7 +47,7 @@ class YodaCommand extends Command {
         'https://www.yodaspeak.co.uk/webservice/yodatalk.php?wsdl'
       );
     } catch {
-      return msg.channel.send(`Yoda API error.`);
+      return msg.channel.send(`${EMOJIS.ERROR} Yoda API error.`);
     }
     const response = await client.yodaTalkAsync({ inputText: text });
 

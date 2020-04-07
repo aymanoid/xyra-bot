@@ -11,7 +11,6 @@ class RapeCommand extends Command {
       args: [
         {
           id: 'member',
-          match: 'content',
           type: 'member',
         },
       ],

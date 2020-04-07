@@ -1,5 +1,6 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
+import { EMOJIS } from '../../util/Constants';
 
 class SplashCommand extends Command {
   constructor() {
@@ -29,7 +30,9 @@ class SplashCommand extends Command {
     });
 
     if (!splashURL)
-      return msg.channel.send(`This server has no splash image set.`);
+      return msg.channel.send(
+        `${EMOJIS.ERROR} This server has no splash image set.`
+      );
 
     const splashEmbed = new MessageEmbed()
       .setColor(embedColor)

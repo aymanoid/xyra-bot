@@ -1,5 +1,6 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
+import { EMOJIS } from '../../util/Constants';
 
 class BannerCommand extends Command {
   constructor() {
@@ -29,7 +30,9 @@ class BannerCommand extends Command {
     });
 
     if (!bannerURL)
-      return msg.channel.send(`This server has no banner image set.`);
+      return msg.channel.send(
+        `${EMOJIS.ERROR} This server has no banner image set.`
+      );
 
     const bannerEmbed = new MessageEmbed()
       .setColor(embedColor)

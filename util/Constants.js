@@ -3,5 +3,6 @@ export const EMOJIS = {
   SUCCESS: ':white_check_mark:',
   ERROR: ':x:',
   INFO: ':information_source:',
+  LOADING: ':sparkle:',
   NOTIFY: ':bell:',
 };

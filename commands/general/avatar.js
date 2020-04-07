@@ -1,5 +1,6 @@
 import { Command, Argument } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
+import { EMOJIS } from '../../util/Constants';
 
 class AvatarCommand extends Command {
   constructor() {
@@ -34,7 +35,7 @@ class AvatarCommand extends Command {
 
     if (typeof args.serverOrMember === 'string') {
       if (!currGuild.iconURL())
-        return msg.channel.send('This server has no icon set.');
+        return msg.channel.send(`${EMOJIS.ERROR} This server has no icon set.`);
       isGuild = true;
       iconURL = currGuild.iconURL({
         format: 'png',

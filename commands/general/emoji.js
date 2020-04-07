@@ -1,10 +1,11 @@
 import { Command, Argument } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
+import { EMOJIS } from '../../util/Constants';
 
 class EmojiCommand extends Command {
   constructor() {
     super('emoji', {
-      aliases: ['emoji', 'enlarge'],
+      aliases: ['emoji', 'emote', 'enlarge'],
       description: {
         content: 'Enlarges an emoji.',
         usage: '<emoji>',
@@ -23,7 +24,7 @@ class EmojiCommand extends Command {
 
   async exec(msg, args) {
     if (!args.emoji || (args.emoji.custom && !args.emoji.valid))
-      return msg.channel.send('No valid emoji was provided.');
+      return msg.channel.send(`${EMOJIS.ERROR} No valid emoji was provided.`);
 
     const embedColor = msg.guild.me.displayColor;
 

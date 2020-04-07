@@ -3,6 +3,7 @@ import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
 // eslint-disable-next-line no-unused-vars, import/no-unresolved
 import momentDurationFormatSetup from 'moment-duration-format';
+import { EMOJIS } from '../../util/Constants';
 
 class ActivityCommand extends Command {
   constructor() {
@@ -39,7 +40,7 @@ class ActivityCommand extends Command {
       activities = trgMember.presence.activities;
     else
       return msg.channel.send(
-        `\`${trgMember.user.tag}\` isn't playing anything currently.`
+        `${EMOJIS.ERROR} \`${trgMember.user.tag}\` isn't playing anything currently.`
       );
 
     const gameInfoEmbeds = [];

@@ -1,6 +1,7 @@
 import { Command, Argument } from 'discord-akairo';
 import axios from 'axios';
 import path from 'path';
+import { EMOJIS } from '../../util/Constants';
 import CommandHelp from '../../util/CommandHelp';
 
 class AddEmojiCommand extends Command {
@@ -41,7 +42,7 @@ class AddEmojiCommand extends Command {
     if (args.emoji.valid || args.emoji.href || args.emoji.url) {
       if (args.name && !args.name.match(/^[a-z0-9_]{2,32}$/i))
         return msg.channel.send(
-          'Emoji name must be between 2 and 32 characters long, and can only contain alphanumeric characters and underscores.'
+          `${EMOJIS.ERROR} Emoji name must be between 2 and 32 characters long, and can only contain alphanumeric characters and underscores.`
         );
 
       emojiURL = args.emoji.valid
@@ -57,30 +58,39 @@ class AddEmojiCommand extends Command {
         )
       )
         return msg.channel.send(
-          `Emoji must be in type jpg, jpeg, png, or gif.`
+          `${EMOJIS.ERROR} Emoji must be in type jpg, jpeg, png, or gif.`
         );
       if (imageInfo.headers['content-length'] >= 256000)
-        return msg.channel.send(`Emoji image must be under 256kb in size.`);
+        return msg.channel.send(
+          `${EMOJIS.ERROR} Emoji image must be under 256kb in size.`
+        );
       let filename = path.parse(emojiURL).name;
       filename = filename.match(/^[a-z0-9_]{2,32}$/i) ? filename : 'emoji';
       emojiName = args.name || (args.emoji.valid ? args.emoji.name : filename);
 
       const finalMsg = await msg.channel.send(
-        'Adding the emoji, please wait...'
+        `${EMOJIS.LOADING} Adding the emoji, please wait...`
       );
 
       let emoji;
       try {
         emoji = await msg.guild.emojis.create(emojiURL, emojiName);
-      } catch (e) {
-        return msg.channel.send('There was an error adding the emoji.');
+      } catch (err) {
+        msg.channel.send(
+          `${EMOJIS.ERROR} There was an error adding the emoji.`
+        );
+        throw err;
       }
 
       return finalMsg.edit(
-        `\`${emojiName}\` emoji has been added. ${emoji.toString()}`
+        `${
+          EMOJIS.SUCCESS
+        } \`${emojiName}\` emoji has been added. ${emoji.toString()}`
       );
     }
-    return msg.channel.send('The provided emoji/url seems invalid.');
+    return msg.channel.send(
+      `${EMOJIS.ERROR} The provided emoji/url seems invalid.`
+    );
   }
 }
 

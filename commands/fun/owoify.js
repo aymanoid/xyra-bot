@@ -1,5 +1,6 @@
 import { Command } from 'discord-akairo';
 import owo from '@zuzak/owo';
+import { EMOJIS } from '../../util/Constants';
 
 class OwOifyCommand extends Command {
   constructor() {
@@ -33,7 +34,9 @@ class OwOifyCommand extends Command {
         false
       );
       if (!msgs || !msgs[0] || !msgs[0].content)
-        return msg.channel.send(`There is no message before yours.`);
+        return msg.channel.send(
+          `${EMOJIS.ERROR} There is no message before yours.`
+        );
       text = msgs[0].content;
       author = msgs[0].member.displayName;
     } else {
