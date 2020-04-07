@@ -88,6 +88,14 @@ class XyraClient extends AkairoClient {
       return emojiObj;
     });
 
+    this.commandHandler.resolver.addType('userMentionG', (message, phrase) => {
+      if (!phrase) return null;
+      const id =
+        phrase.match(/<@!?(\d{17,19})>/) || phrase.match(/^(\d{17,19})$/);
+      if (!id) return null;
+      return id[1] || null;
+    });
+
     this.inhibitorHandler = new InhibitorHandler(this, {
       directory: './inhibitors/',
     });
