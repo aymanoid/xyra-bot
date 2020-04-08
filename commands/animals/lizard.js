@@ -1,13 +1,13 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
-import axios from 'axios';
+import NekosLife from 'nekos.life';
 
-class DuckCommand extends Command {
+class LizardCommand extends Command {
   constructor() {
-    super('duck', {
-      aliases: ['duck', 'ducc'],
+    super('lizard', {
+      aliases: ['lizard', 'geko'],
       description: {
-        content: 'Posts a random image of a duck.',
+        content: 'Posts a random image of a lizard.',
       },
       category: 'animals',
       channel: 'guild',
@@ -16,7 +16,7 @@ class DuckCommand extends Command {
   }
 
   async exec(msg) {
-    const botColor = msg.guild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
     const avatarURL = msg.author.displayAvatarURL({
       format: 'png',
       dynamic: true,
@@ -24,24 +24,18 @@ class DuckCommand extends Command {
     });
 
     let imageURL;
-    const sourceNum = Math.floor(Math.random() * 2);
+    const sourceNum = Math.floor(Math.random() * 1);
     switch (sourceNum) {
       case 0:
-        imageURL = (await axios.get('https://random-d.uk/api/v1/random')).data
-          .url;
-        break;
-      case 1:
-        imageURL = (
-          await axios.get('https://random-d.uk/api/v1/random?type=gif')
-        ).data.url;
+        imageURL = (await new NekosLife().sfw.lizard()).url;
         break;
       default:
         imageURL = 'https://i.imgur.com/suBBQf8.png';
     }
 
     const imageEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
-      .setTitle('Quack quack 🦆')
+      .setColor(embedColor)
+      .setTitle('Geko 🦎')
       .setImage(imageURL)
       .setFooter(msg.author.tag, avatarURL);
 
@@ -49,4 +43,4 @@ class DuckCommand extends Command {
   }
 }
 
-export default DuckCommand;
+export default LizardCommand;
