@@ -4,6 +4,7 @@ import {
   InhibitorHandler,
   ListenerHandler,
 } from 'discord-akairo';
+import path from 'path';
 import Logger from '../util/Logger';
 import Database from './Database';
 import SettingsProvider from './SettingsProviders';
@@ -26,7 +27,7 @@ class XyraClient extends AkairoClient {
     );
 
     this.commandHandler = new CommandHandler(this, {
-      directory: './commands/',
+      directory: path.join(__dirname, '..', 'commands'),
       ignoreCooldownID: [''],
       aliasReplacement: /-/g,
       prefix: (message) => this.settings.get(message.guild, 'prefix', '$'),
@@ -97,11 +98,11 @@ class XyraClient extends AkairoClient {
     });
 
     this.inhibitorHandler = new InhibitorHandler(this, {
-      directory: './inhibitors/',
+      directory: path.join(__dirname, '..', 'inhibitors'),
     });
 
     this.listenerHandler = new ListenerHandler(this, {
-      directory: './listeners/',
+      directory: path.join(__dirname, '..', 'listeners'),
     });
 
     this.settings = new SettingsProvider(Setting);
