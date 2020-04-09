@@ -29,7 +29,7 @@ class XyraClient extends AkairoClient {
       directory: './commands/',
       ignoreCooldownID: [''],
       aliasReplacement: /-/g,
-      prefix: (message) => this.settings.get(message.guild, 'prefix', '$$'),
+      prefix: (message) => this.settings.get(message.guild, 'prefix', '$'),
       allowMention: true,
       commandUtil: true,
       commandUtilLifetime: 10000,

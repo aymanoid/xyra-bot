@@ -25,7 +25,7 @@ class HelpCommand extends Command {
 
   async exec(msg, args) {
     let helpEmbed = new MessageEmbed();
-    const currPrefix = this.client.settings.get(msg.guild, 'prefix', '$$');
+    const currPrefix = this.client.settings.get(msg.guild, 'prefix', '$');
     if (!args.text) {
       const embedColor = msg.guild ? msg.guild.me.displayColor : null;
       const cmdCount = (categoryID) =>
