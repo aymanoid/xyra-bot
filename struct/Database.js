@@ -14,20 +14,34 @@ class Database {
     return db;
   }
 
+  static async connect() {
+    await db.authenticate();
+    Logger.info('Connection to database has been established successfully.', {
+      tag: 'Postgres',
+    });
+    await this.loadModels(path.join(__dirname, '..', 'models'));
+  }
+
   static async authenticate() {
-    try {
-      await db.authenticate();
-      Logger.info('Connection to database has been established successfully.', {
-        tag: 'Postgres',
-      });
-      await this.loadModels(path.join(__dirname, '..', 'models'));
-    } catch (err) {
-      Logger.error('Unable to connect to the database:', { tag: 'Postgres' });
-      Logger.stacktrace(err, { tag: 'Postgres' });
-      Logger.info('Attempting to connect again in 5 seconds...', {
-        tag: 'Postgres',
-      });
-      setTimeout(this.authenticate, 5000);
+    let retries = 30;
+    while (retries) {
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        await this.connect();
+        break;
+      } catch (err) {
+        Logger.error('Unable to connect to the database:', { tag: 'Postgres' });
+        Logger.stacktrace(err, { tag: 'Postgres' });
+        Logger.info('Attempting to connect again in 10 seconds...', {
+          tag: 'Postgres',
+        });
+        retries -= 1;
+        Logger.info(`Retries left: ${retries}`, {
+          tag: 'Postgres',
+        });
+        // eslint-disable-next-line no-await-in-loop
+        await new Promise((res) => setTimeout(res, 10000));
+      }
     }
   }
 

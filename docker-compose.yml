@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.7'
 services:
   bot:
     image: 'zeutyx/xyra-bot'
@@ -6,8 +6,7 @@ services:
     restart: always
     environment:
       - BOT_TOKEN=${BOT_TOKEN}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    links:
+    depends_on:
       - db
   db:
     image: 'postgres'
