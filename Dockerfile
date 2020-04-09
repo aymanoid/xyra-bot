@@ -12,7 +12,7 @@ RUN apk add --update \
     && apk del .build
 
 # Copy project to WORKDIR
-COPY . .
+COPY . /usr/src/bot
 
 # Run the bot
 CMD npm run start
