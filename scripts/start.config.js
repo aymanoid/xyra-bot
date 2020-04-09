@@ -5,7 +5,7 @@ module.exports = {
       script: 'index.js',
       node_args: '-r esm',
 
-      exec_mode: 'fork',
+      exec_mode: 'cluster',
       max_memory_restart: '1G',
 
       instances: 1,
