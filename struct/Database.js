@@ -4,10 +4,7 @@ const path = require('path');
 const readdir = require('util').promisify(require('fs').readdir);
 const Logger = require('../util/Logger');
 
-const db = new Sequelize(
-  `postgres://postgres:postgres@localhost:5432/xyra-db`,
-  { logging: false }
-);
+const db = new Sequelize(process.env.DB_URL, { logging: false });
 
 class Database {
   static get db() {
