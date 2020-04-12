@@ -24,7 +24,8 @@ class BunnyCommand extends Command {
     });
 
     let imageURL;
-    const sourceNum = Math.floor(Math.random() * 1);
+    const sources = [0];
+    const sourceNum = sources[Math.floor(Math.random() * sources.length)];
     switch (sourceNum) {
       case 0:
         imageURL = (

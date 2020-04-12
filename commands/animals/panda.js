@@ -2,12 +2,12 @@ import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
 import axios from 'axios';
 
-class DogCommand extends Command {
+class PandaCommand extends Command {
   constructor() {
-    super('dog', {
-      aliases: ['dog', 'doggo', 'pupper', 'woof'],
+    super('panda', {
+      aliases: ['panda'],
       description: {
-        content: 'Posts a random image of a dog.',
+        content: 'Posts a random image of a panda.',
       },
       category: 'animals',
       channel: 'guild',
@@ -28,7 +28,8 @@ class DogCommand extends Command {
     const sourceNum = sources[Math.floor(Math.random() * sources.length)];
     switch (sourceNum) {
       case 0:
-        imageURL = (await axios.get('https://random.dog/woof.json')).data.url;
+        imageURL = (await axios.get('https://some-random-api.ml/img/panda'))
+          .data.link;
         break;
       default:
         imageURL = 'https://i.imgur.com/suBBQf8.png';
@@ -36,7 +37,7 @@ class DogCommand extends Command {
 
     const imageEmbed = new MessageEmbed()
       .setColor(embedColor)
-      .setTitle('Woof 🐶')
+      .setTitle('Panda 🐼')
       .setImage(imageURL)
       .setFooter(msg.author.tag, avatarURL);
 
@@ -44,4 +45,4 @@ class DogCommand extends Command {
   }
 }
 
-export default DogCommand;
+export default PandaCommand;

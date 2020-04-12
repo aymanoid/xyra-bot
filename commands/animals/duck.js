@@ -24,7 +24,8 @@ class DuckCommand extends Command {
     });
 
     let imageURL;
-    const sourceNum = Math.floor(Math.random() * 2);
+    const sources = [0, 1];
+    const sourceNum = sources[Math.floor(Math.random() * sources.length)];
     switch (sourceNum) {
       case 0:
         imageURL = (await axios.get('https://random-d.uk/api/v1/random')).data

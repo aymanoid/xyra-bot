@@ -24,10 +24,15 @@ class BirdCommand extends Command {
     });
 
     let imageURL;
-    const sourceNum = Math.floor(Math.random() * 1);
+    const sources = [0, 1];
+    const sourceNum = sources[Math.floor(Math.random() * sources.length)];
     switch (sourceNum) {
       case 0:
         [imageURL] = (await axios.get('http://shibe.online/api/birds')).data;
+        break;
+      case 1:
+        imageURL = (await axios.get('https://some-random-api.ml/img/birb')).data
+          .link;
         break;
       default:
         imageURL = 'https://i.imgur.com/suBBQf8.png';
