@@ -76,6 +76,8 @@ class AddEmojiCommand extends Command {
       try {
         emoji = await msg.guild.emojis.create(emojiURL, emojiName);
       } catch (err) {
+        if (err.code === 30008)
+          return msg.channel.send(`${EMOJIS.ERROR} ${err.message}`);
         msg.channel.send(
           `${EMOJIS.ERROR} There was an error adding the emoji.`
         );
