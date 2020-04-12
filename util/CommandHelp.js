@@ -17,7 +17,6 @@ export default function (cmd, msg, botUser) {
     .setDescription(cmd.description)
     .setColor(color);
 
-  console.log(cmd);
   cmdInfoEmbed.description = `**Description:** ${cmd.description.content}\n`;
 
   cmdInfoEmbed.description += `**Cooldown:** ${
