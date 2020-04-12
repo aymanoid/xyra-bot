@@ -1,13 +1,13 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
-import NekosLife from 'nekos.life';
+import axios from 'axios';
 
-class NekoCommand extends Command {
+class KannaCommand extends Command {
   constructor() {
-    super('neko', {
-      aliases: ['neko', 'catgirl'],
+    super('kanna', {
+      aliases: ['kanna'],
       description: {
-        content: 'Posts a random image of a catgirl.',
+        content: 'Posts a random image of Kanna.',
       },
       category: 'images',
       channel: 'guild',
@@ -28,7 +28,8 @@ class NekoCommand extends Command {
     const sourceNum = sources[Math.floor(Math.random() * sources.length)];
     switch (sourceNum) {
       case 0:
-        imageURL = (await new NekosLife().nekosClient.sfw.neko()).url;
+        imageURL = (await axios.get('https://nekobot.xyz/api/image?type=kanna'))
+          .data.message;
         break;
       default:
         imageURL = 'https://i.imgur.com/suBBQf8.png';
@@ -36,7 +37,7 @@ class NekoCommand extends Command {
 
     const imageEmbed = new MessageEmbed()
       .setColor(botColor)
-      .setTitle('Nyaa')
+      .setTitle('')
       .setImage(imageURL)
       .setFooter(msg.author.tag, avatarURL);
 
@@ -44,4 +45,4 @@ class NekoCommand extends Command {
   }
 }
 
-export default NekoCommand;
+export default KannaCommand;
