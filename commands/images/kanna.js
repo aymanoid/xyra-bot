@@ -37,7 +37,7 @@ class KannaCommand extends Command {
 
     const imageEmbed = new MessageEmbed()
       .setColor(botColor)
-      .setTitle('')
+      .setTitle('Kanna <a:kannajump:645856904903524362>')
       .setImage(imageURL)
       .setFooter(msg.author.tag, avatarURL);
 
