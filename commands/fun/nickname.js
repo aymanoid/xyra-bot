@@ -14,8 +14,8 @@ class NicknameCommand extends Command {
     });
   }
 
-  async exec(msg, args) {
-    const trgMember = args.member;
+  async exec(msg) {
+    const trgMember = msg.member;
     const nick = nicks[Math.floor(Math.random() * nicks.length)];
 
     if (!trgMember.manageable)
