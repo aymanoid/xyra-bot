@@ -154,7 +154,7 @@ class UserInfoCommand extends Command {
       });
 
       userInfoEmbed.addField(
-        `Roles [${trgMember.roles.cache.size}]`,
+        `Roles [${trgMember.roles.cache.size - 1}]`,
         roles,
         false
       );
