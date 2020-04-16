@@ -28,7 +28,7 @@ class NekoCommand extends Command {
     const sourceNum = sources[Math.floor(Math.random() * sources.length)];
     switch (sourceNum) {
       case 0:
-        imageURL = (await new NekosLife().nekosClient.sfw.neko()).url;
+        imageURL = (await new NekosLife().sfw.neko()).url;
         break;
       default:
         imageURL = 'https://i.imgur.com/suBBQf8.png';
