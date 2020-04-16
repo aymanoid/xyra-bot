@@ -28,11 +28,11 @@ class CustomScriptCommand extends Command {
 
   async exec(msg, args) {
     switch (args.script.toLowerCase()) {
-      case 'nekoslife' || 'nl': {
+      case ('nekoslife', 'nl'): {
         const imageURL = (await new NekosLife()[args.text1][args.text2]()).url;
         return msg.channel.send(imageURL);
       }
-      case 'nekobot' || 'nb': {
+      case ('nekobot', 'nb'): {
         const imageURL = (
           await axios.get(`https://nekobot.xyz/api/image?type=${args.text1}`)
         ).data.message;
