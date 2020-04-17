@@ -38,7 +38,8 @@ class HelpCommand extends Command {
         cmdCount('animals') +
         cmdCount('images') +
         cmdCount('management') +
-        cmdCount('moderation');
+        cmdCount('moderation') +
+        cmdCount('search');
       helpEmbed
         .setTitle('Xyra Command List')
         .setDescription(`The prefix for ${msg.guild.name} is \`${currPrefix}\``)
@@ -77,6 +78,11 @@ class HelpCommand extends Command {
         .addField(
           `Moderation (${cmdCount('moderation')})`,
           `\`${currPrefix}help moderation\``,
+          true
+        )
+        .addField(
+          `Search (${cmdCount('search')})`,
+          `\`${currPrefix}help search\``,
           true
         )
         .setFooter(`There's a total of ${totalCount} commands currently.`);
