@@ -19,7 +19,7 @@ class ColorCommand extends Command {
           id: 'color',
           match: 'content',
           type: 'color',
-          default: () => Math.floor(Math.random() * 16777215),
+          default: () => Math.floor(Math.random() * 0xffffff),
         },
       ],
     });

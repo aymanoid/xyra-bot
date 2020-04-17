@@ -11,7 +11,7 @@ export default function (cmd, msg, botUser) {
   });
   const color = msg.guild
     ? msg.guild.members.cache.get(botUser.id).displayColor
-    : 16777215;
+    : '#FFFFFF';
   const cmdInfoEmbed = new MessageEmbed()
     .setAuthor(`Help for ${aliase}`, avatarURL)
     .setDescription(cmd.description)

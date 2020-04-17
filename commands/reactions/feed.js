@@ -24,7 +24,7 @@ class FeedCommand extends Command {
   }
 
   async exec(msg, args) {
-    const botColor = msg.guild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
 
     const trgMember = args.meOrMember === 'me' ? msg.member : args.meOrMember;
 
@@ -37,7 +37,7 @@ class FeedCommand extends Command {
     const imageURL = (await nekosClient.sfw.feed()).url;
 
     const actionEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setDescription(description)
       .setImage(imageURL);
 

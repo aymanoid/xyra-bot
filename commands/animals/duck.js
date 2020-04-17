@@ -16,7 +16,7 @@ class DuckCommand extends Command {
   }
 
   async exec(msg) {
-    const botColor = msg.guild.me.displayColor;
+    const embedColor = msg.guild.me.displayColor;
     const avatarURL = msg.author.displayAvatarURL({
       format: 'png',
       dynamic: true,
@@ -41,7 +41,7 @@ class DuckCommand extends Command {
     }
 
     const imageEmbed = new MessageEmbed()
-      .setColor(botColor || 16777215)
+      .setColor(embedColor)
       .setTitle('Quack quack 🦆')
       .setImage(imageURL)
       .setFooter(msg.author.tag, avatarURL);

@@ -9,12 +9,13 @@ class InviteCommand extends Command {
         content: 'Gives you an invite link for the bot.',
       },
       category: 'general',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
     });
   }
 
   async exec(msg) {
-    const embedColor = msg.guild ? msg.guild.me.displayColor : 16777215;
+    const embedColor = msg.guild.me.displayColor;
 
     const inviteEmbed = new MessageEmbed()
       .setColor(embedColor)

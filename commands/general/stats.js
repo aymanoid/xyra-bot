@@ -10,12 +10,13 @@ class StatsCommand extends Command {
         content: 'Displays some bot statistics.',
       },
       category: 'general',
+      channel: 'guild',
       clientPermissions: ['EMBED_LINKS'],
     });
   }
 
   async exec(msg) {
-    const embedColor = msg.guild ? msg.guild.me.displayColor : 16777215;
+    const embedColor = msg.guild.me.displayColor;
 
     const avatarURL = this.client.user.displayAvatarURL({
       format: 'png',
