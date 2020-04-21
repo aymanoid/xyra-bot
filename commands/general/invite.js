@@ -20,7 +20,7 @@ class InviteCommand extends Command {
     const inviteEmbed = new MessageEmbed()
       .setColor(embedColor)
       .setDescription(
-        "Here's the invite link: [xyra.io/invite](https://xyra.io/invite)"
+        `Add ${this.client.user.username} to your server: [xyra.io/invite](https://xyra.io/invite)`
       );
 
     return msg.channel.send(inviteEmbed);
