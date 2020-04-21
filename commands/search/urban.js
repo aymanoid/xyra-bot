@@ -17,6 +17,7 @@ class UrbanCommand extends Command {
       args: [
         {
           id: 'word',
+          match: 'content',
         },
       ],
     });
