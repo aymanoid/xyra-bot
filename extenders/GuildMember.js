@@ -24,5 +24,11 @@ module.exports = Structures.extend(
           this.permissions.has(Permissions.FLAGS.BAN_MEMBERS)
         );
       }
+
+      canEdit(role) {
+        if (role.managed) return false;
+        if (!this.permissions.has(Permissions.FLAGS.MANAGE_ROLES)) return false;
+        return this.roles.highest.comparePositionTo(role) > 0;
+      }
     }
 );
