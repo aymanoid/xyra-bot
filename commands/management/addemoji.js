@@ -21,6 +21,7 @@ class AddEmojiCommand extends Command {
       channel: 'guild',
       clientPermissions: ['MANAGE_EMOJIS'],
       userPermissions: ['MANAGE_EMOJIS'],
+      cooldown: 7000,
       args: [
         {
           id: 'emoji',
