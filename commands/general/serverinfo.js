@@ -55,28 +55,22 @@ class ServerInfoCommand extends Command {
         russia: 'Russia',
       }[currGuild.region] || currGuild.region;
 
+    const { memberCount } = currGuild;
+    const botCount = currGuild.members.cache.filter((m) => m.user.bot).size;
+    const humanCount = memberCount - botCount;
+    const onlineCount = currGuild.members.cache.filter(
+      (m) => m.presence.status !== 'offline'
+    ).size;
+
     const serverInfoEmbed = new MessageEmbed()
       .setColor(embedColor)
       .setAuthor(currGuild.name, iconURL)
       .addField('Owner', currGuild.owner.user.tag, true)
       .addField('Region', serverRegion, true)
-      .addField('Members', currGuild.memberCount, true)
-      .addField(
-        'Humans',
-        currGuild.members.cache.filter((m) => !m.user.bot).size,
-        true
-      )
-      .addField(
-        'Bots',
-        currGuild.members.cache.filter((m) => m.user.bot).size,
-        true
-      )
-      .addField(
-        'Online',
-        currGuild.members.cache.filter((m) => m.presence.status !== 'offline')
-          .size,
-        true
-      )
+      .addField('Members', memberCount, true)
+      .addField('Humans', humanCount, true)
+      .addField('Bots', botCount, true)
+      .addField('Online', onlineCount, true)
       .addField(
         `Level ${currGuild.premiumTier}`,
         `${
