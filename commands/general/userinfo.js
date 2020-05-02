@@ -153,11 +153,13 @@ class UserInfoCommand extends Command {
         omission: ' [...]',
       });
 
-      userInfoEmbed.addField(
-        `Roles [${trgMember.roles.cache.size - 1}]`,
-        roles,
-        false
-      );
+      if (roles.length) {
+        userInfoEmbed.addField(
+          `Roles [${trgMember.roles.cache.size - 1}]`,
+          roles,
+          false
+        );
+      }
     }
 
     return msg.channel.send(userInfoEmbed);
