@@ -1,6 +1,6 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
-import * as TikTokScraper from 'tiktok-scraper';
+import { getVideoMeta } from 'tiktok-scraper';
 import moment from 'moment';
 import { EMOJIS } from '../../util/Constants';
 
@@ -32,14 +32,14 @@ class TikTokVideoCommand extends Command {
 
     let videoMeta;
     try {
-      videoMeta = await TikTokScraper.getVideoMeta(args.query);
+      videoMeta = await getVideoMeta(args.query);
     } catch (error) {
       return msg.channel.send(
         `${EMOJIS.ERROR} The provided link doesn't seem like a valid TikTok Video link.`
       );
     }
 
-    /* const userProfileInfo = await TikTokScraper.getUserProfileInfo(
+    /* const userProfileInfo = await getUserProfileInfo(
       videoMeta.authorMeta.name
     );
 

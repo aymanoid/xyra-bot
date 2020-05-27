@@ -1,6 +1,6 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
-import * as TikTokScraper from 'tiktok-scraper';
+import { getUserProfileInfo } from 'tiktok-scraper';
 import { EMOJIS } from '../../util/Constants';
 
 class TikTokCommand extends Command {
@@ -29,7 +29,7 @@ class TikTokCommand extends Command {
 
     let userProfileInfo;
     try {
-      userProfileInfo = await TikTokScraper.getUserProfileInfo(args.username);
+      userProfileInfo = await getUserProfileInfo(args.username);
     } catch (error) {
       return msg.channel.send(
         `${EMOJIS.ERROR} No account found with that username.`
