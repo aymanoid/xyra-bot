@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import { MessageEmbed } from 'discord.js';
+import { MessageEmbed, Util } from 'discord.js';
 import axios from 'axios';
 import { EMOJIS } from '../../util/Constants';
 
@@ -72,18 +72,17 @@ class InstagramCommand extends Command {
 
     const instagramEmbed = new MessageEmbed()
       .setColor('#e4405f')
-      .setTitle(`${title}${verified}`)
+      .setTitle(Util.escapeMarkdown(`${title}${verified}`))
       .setURL(profileURL)
       .setThumbnail(profilePicURL)
-      .setDescription(description)
+      .setDescription(Util.escapeMarkdown(description))
       .addField('Posts', postsCount, true)
       .addField('Followers', followersCount, true)
       .addField('Following', followingCount, true)
       .addField('Privacy', privacy, true)
-      .addField('ID', accountID, true)
       .setFooter(
-        'Instagram',
-        'https://www.instagram.com/static/images/ico/favicon-192.png/68d99ba29cc8.png'
+        `Instagram • ID: ${accountID}`,
+        'https://logo.clearbit.com/instagram.com'
       );
 
     return msg.channel.send(instagramEmbed);

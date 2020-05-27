@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import { MessageEmbed } from 'discord.js';
+import { MessageEmbed, Util } from 'discord.js';
 import { getUserProfileInfo } from 'tiktok-scraper';
 import { EMOJIS } from '../../util/Constants';
 
@@ -51,12 +51,13 @@ class TikTokCommand extends Command {
     const following = userProfileInfo.following.toLocaleString();
     const followers = userProfileInfo.fans.toLocaleString();
     const likes = Number(userProfileInfo.heart).toLocaleString();
-    const id = userProfileInfo.userId;
+    const accountID = userProfileInfo.userId;
 
     const tiktokEmbed = new MessageEmbed()
-      .setTitle(`${title}${verified}`)
+      .setColor('#010101')
+      .setTitle(Util.escapeMarkdown(`${title}${verified}`))
       .setURL(profileURL)
-      .setDescription(signature)
+      .setDescription(Util.escapeMarkdown(signature))
       .setThumbnail(profilePicURL)
       .addField('Videos', videos, true)
       .addField('Favorites', favorites, true)
@@ -64,7 +65,10 @@ class TikTokCommand extends Command {
       .addField('Following', following, true)
       .addField('Followers', followers, true)
       .addField('Likes', likes, true)
-      .setFooter(`TikTok • ID: ${id}`, 'https://logo.clearbit.com/tiktok.com');
+      .setFooter(
+        `TikTok • ID: ${accountID}`,
+        'https://logo.clearbit.com/tiktok.com'
+      );
 
     return msg.channel.send(tiktokEmbed);
   }

@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import { MessageEmbed } from 'discord.js';
+import { MessageEmbed, Util } from 'discord.js';
 import { getVideoMeta } from 'tiktok-scraper';
 import moment from 'moment';
 import { EMOJIS } from '../../util/Constants';
@@ -50,7 +50,11 @@ class TikTokVideoCommand extends Command {
     const profilePicURL = userProfileInfo.coversMedium[0]; */
 
     const username = videoMeta.authorMeta.name;
+    const videoTitle = videoMeta.text;
+    const videoThumb = videoMeta.imageUrl;
     const createdOn = moment.unix(videoMeta.createTime).format('lll z');
+    const { musicName } = videoMeta.musicMeta;
+    const { musicAuthor } = videoMeta.musicMeta;
     const playCount = videoMeta.playCount.toLocaleString();
     const { videoUrl } = videoMeta;
     const { videoUrlNoWaterMark } = videoMeta;
@@ -59,12 +63,13 @@ class TikTokVideoCommand extends Command {
     const shareCount = videoMeta.shareCount.toLocaleString();
 
     const tiktokVideoEmbed = new MessageEmbed()
+      .setColor('#010101')
       .setAuthor(`@${username}`, null, `https://www.tiktok.com/@${username}`)
-      .setDescription(videoMeta.text)
-      .setThumbnail(videoMeta.imageUrl)
+      .setDescription(Util.escapeMarkdown(videoTitle))
+      .setThumbnail(videoThumb)
       .addField('Created On', createdOn, true)
-      .addField('Music Name', videoMeta.musicMeta.musicName, true)
-      .addField('Music Author', videoMeta.musicMeta.musicAuthor, true)
+      .addField('Music Name', musicName, true)
+      .addField('Music Author', musicAuthor, true)
       .addField('Play Count', playCount, true)
       .addField('Video', `[URL](${videoUrl})`, true)
       .addField('Video No Watermark', `[URL](${videoUrlNoWaterMark})`, true)
