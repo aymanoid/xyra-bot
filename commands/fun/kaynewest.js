@@ -1,5 +1,6 @@
 import { Command } from 'discord-akairo';
 import axios from 'axios';
+import { EMOJIS } from '../../util/Constants';
 
 class KayneWestCommand extends Command {
   constructor() {
@@ -13,7 +14,12 @@ class KayneWestCommand extends Command {
   }
 
   async exec(msg) {
-    const response = await axios.get('https://api.kanye.rest/?format=text');
+    let response;
+    try {
+      response = await axios.get('https://api.kanye.rest/?format=text');
+    } catch {
+      return msg.channel.send(`${EMOJIS.ERROR} API error.`);
+    }
     const result = response.data;
 
     return msg.channel.send(result);
