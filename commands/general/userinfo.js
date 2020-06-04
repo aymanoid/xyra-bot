@@ -79,16 +79,20 @@ class UserInfoCommand extends Command {
     };
 
     if (trgMember.presence.activities.length) {
-      if (trgMember.presence.activities[0].type !== 'CUSTOM_STATUS') {
-        trgMemberActivity = `${
-          activityText[trgMember.presence.activities[0].type]
-        } **${trgMember.presence.activities[0].name}**`;
+      const firstActivity = trgMember.presence.activities[0];
+      if (firstActivity.type !== 'CUSTOM_STATUS') {
+        trgMemberActivity = `${activityText[firstActivity.type]} **${
+          firstActivity.name
+        }**`;
       } else {
         let activityEmoji = '';
-        if (trgMember.presence.activities[0].emoji)
-          activityEmoji = `${trgMember.presence.activities[0].emoji.toString()} `;
+        if (firstActivity.emoji) {
+          activityEmoji = this.client.emojis.cache.get(firstActivity.emoji.id)
+            ? `${firstActivity.emoji.toString()} `
+            : `:${firstActivity.emoji.name}: `;
+        }
 
-        const secondAcitvity = `${
+        const secondActivity = `${
           // eslint-disable-next-line no-nested-ternary
           trgMember.presence.activities
             ? trgMember.presence.activities[1]
@@ -99,9 +103,7 @@ class UserInfoCommand extends Command {
             : ''
         }`;
         trgMemberActivity = `${activityEmoji}${
-          trgMember.presence.activities[0].state
-            ? trgMember.presence.activities[0].state
-            : secondAcitvity
+          firstActivity.state ? firstActivity.state : secondActivity
         }`;
       }
     }
