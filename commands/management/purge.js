@@ -33,7 +33,12 @@ class PurgeCommand extends Command {
         `${EMOJIS.ERROR} Count should be a number between 1 and 100.`
       );
 
-    return msg.channel.bulkDelete(count + 1);
+    try {
+      return await msg.channel.bulkDelete(count + 1);
+    } catch (err) {
+      msg.channel.send(`${EMOJIS.ERROR} There was an error purging messages.`);
+      throw err;
+    }
   }
 }
 
