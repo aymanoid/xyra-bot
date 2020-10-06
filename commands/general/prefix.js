@@ -36,8 +36,7 @@ class PrefixCommand extends Command {
       return msg.channel.send(`The prefix of this server is \`${currPrefix}\``);
     }
     await this.client.settings.set(msg.guild, 'prefix', prefix);
-    if (prefix === '$')
-      return msg.channel.send('Prefix has been reset to `$$`');
+    if (prefix === '$') return msg.channel.send('Prefix has been reset to `$`');
     return msg.channel.send(`Prefix has been set to \`${prefix}\``);
   }
 }
