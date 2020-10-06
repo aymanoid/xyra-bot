@@ -1,6 +1,6 @@
 import { Command, Argument } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
-import { NovelCovid } from 'novelcovid';
+import novelcovid from 'novelcovid';
 import moment from 'moment';
 
 class CovidCommand extends Command {
@@ -24,11 +24,10 @@ class CovidCommand extends Command {
   }
 
   async exec(msg, args) {
-    const track = new NovelCovid();
     let data;
     if (args.text) {
       if (args.text === 'top') {
-        data = await track.countries(null, 'sort by');
+        data = await novelcovid.countries(null, 'sort by');
         const covidEmbed = new MessageEmbed()
           .setTitle('COVID-19 Statistics | Top 10 Countries')
           .setThumbnail(
@@ -47,9 +46,9 @@ class CovidCommand extends Command {
         }
         return msg.channel.send(covidEmbed);
       }
-      data = await track.countries(args.text);
+      data = await novelcovid.countries(args.text);
       if (!data || data.message) {
-        const statesData = await track.states();
+        const statesData = await novelcovid.states();
         data = statesData.filter((obj) => {
           return obj.state.toLowerCase() === args.text.toLowerCase();
         });
@@ -60,7 +59,7 @@ class CovidCommand extends Command {
         [data] = data;
       }
     } else {
-      data = await track.all();
+      data = await novelcovid.all();
     }
 
     // eslint-disable-next-line no-nested-ternary
