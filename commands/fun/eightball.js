@@ -57,4 +57,4 @@ class EightBallCommand extends Command {
   }
 }
 
-export default EightBallCommand;
+// export default EightBallCommand;
