@@ -41,7 +41,7 @@ class HelpCommand extends Command {
         cmdCount('moderation') +
         cmdCount('search');
       helpEmbed
-        .setTitle('Xyra Command List')
+        .setTitle(`${this.client.user.username} Command List`)
         .setDescription(`The prefix for ${msg.guild.name} is \`${currPrefix}\``)
         .setColor(embedColor)
         .addField(
