@@ -11,6 +11,7 @@ class PrefixCommand extends Command {
       category: 'general',
       channel: 'guild',
       clientPermissions: ['MANAGE_GUILD'],
+      userPermissions: ['MANAGE_GUILD'],
       args: [
         {
           id: 'prefix',
