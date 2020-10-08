@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import './extenders/TextChannel';
+import './extenders/NewsChannel';
 import './extenders/GuildMember';
 import moment from 'moment-timezone';
 import * as Sentry from '@sentry/node';
