@@ -24,7 +24,7 @@ class NicknameCommand extends Command {
       );
 
     try {
-      await trgMember.setNicknem(nick);
+      await trgMember.setNickname(nick);
     } catch (err) {
       msg.channel.send(
         `${EMOJIS.ERROR} There was an error changing your nickname.`
