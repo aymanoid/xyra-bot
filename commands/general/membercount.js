@@ -33,12 +33,12 @@ class MemberCountCommand extends Command {
 
     const memberCountEmbed = new MessageEmbed()
       .setColor(embedColor)
-      .addField('Total', memberCount, true)
-      .addField('Online', onlineCount, true)
-      .addField('Idle', idleCount, true)
-      .addField('Do Not Disturb', dndCount, true)
-      .addField('Offline', offlineCount, true)
-      .addField('Bots', botCount, true);
+      .addField('Total', memberCount.toLocaleString(), true)
+      .addField('Online', onlineCount.toLocaleString(), true)
+      .addField('Idle', idleCount.toLocaleString(), true)
+      .addField('Do Not Disturb', dndCount.toLocaleString(), true)
+      .addField('Offline', offlineCount.toLocaleString(), true)
+      .addField('Bots', botCount.toLocaleString(), true);
 
     return msg.channel.send(memberCountEmbed);
   }

@@ -67,34 +67,40 @@ class ServerInfoCommand extends Command {
       .setAuthor(currGuild.name, iconURL)
       .addField('Owner', currGuild.owner.user.tag, true)
       .addField('Region', serverRegion, true)
-      .addField('Members', memberCount, true)
-      .addField('Humans', humanCount, true)
-      .addField('Bots', botCount, true)
-      .addField('Online', onlineCount, true)
+      .addField('Members', memberCount.toLocaleString(), true)
+      .addField('Humans', humanCount.toLocaleString(), true)
+      .addField('Bots', botCount.toLocaleString(), true)
+      .addField('Online', onlineCount.toLocaleString(), true)
       .addField(
         `Level ${currGuild.premiumTier}`,
         `${
           currGuild.premiumSubscriptionCount
-            ? currGuild.premiumSubscriptionCount
+            ? currGuild.premiumSubscriptionCount.toLocaleString()
             : 0
         } Boosts`,
         true
       )
-      .addField('Roles', currGuild.roles.cache.size, true)
-      .addField('Emotes', currGuild.emojis.cache.size, true)
+      .addField('Roles', currGuild.roles.cache.size.toLocaleString(), true)
+      .addField('Emotes', currGuild.emojis.cache.size.toLocaleString(), true)
       .addField(
         'Channel Categories',
-        currGuild.channels.cache.filter((c) => c.type === 'category').size,
+        currGuild.channels.cache
+          .filter((c) => c.type === 'category')
+          .size.toLocaleString(),
         true
       )
       .addField(
         'Text Channels',
-        currGuild.channels.cache.filter((c) => c.type === 'text').size,
+        currGuild.channels.cache
+          .filter((c) => c.type === 'text')
+          .size.toLocaleString(),
         true
       )
       .addField(
         'Voice Channels',
-        currGuild.channels.cache.filter((c) => c.type === 'voice').size,
+        currGuild.channels.cache
+          .filter((c) => c.type === 'voice')
+          .size.toLocaleString(),
         true
       )
       .setFooter(
