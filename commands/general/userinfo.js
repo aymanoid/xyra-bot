@@ -130,7 +130,7 @@ class UserInfoCommand extends Command {
       .addField('Join Position', joinPosition, true)
       .addField(
         'Account Created On',
-        moment(trgMember.createdAt).format('lll z'),
+        moment(trgMember.user.createdAt).format('lll z'),
         true
       )
       .addField('Account Age', accountAge, true)
