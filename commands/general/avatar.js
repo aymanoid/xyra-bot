@@ -18,7 +18,7 @@ class AvatarCommand extends Command {
         {
           id: 'serverOrMember',
           match: 'content',
-          type: Argument.union(['server', 'guild'], 'member'),
+          type: Argument.union(['server', 'guild'], 'member', 'userMentionG'),
           default: (msg) => msg.member,
         },
       ],
@@ -33,7 +33,7 @@ class AvatarCommand extends Command {
     let iconURL;
     let trgMember;
 
-    if (typeof args.serverOrMember === 'string') {
+    if (args.serverOrMember === 'server' || args.serverOrMember === 'guild') {
       if (!currGuild.iconURL())
         return msg.channel.send(`${EMOJIS.ERROR} This server has no icon set.`);
       isGuild = true;
@@ -43,8 +43,25 @@ class AvatarCommand extends Command {
         size: 2048,
       });
     } else {
-      trgMember = args.serverOrMember;
-      iconURL = trgMember.user.displayAvatarURL({
+      if (typeof args.serverOrMember === 'string') {
+        const globalAvatar = this.client.settings.get(
+          msg.guild,
+          'globalAvatar',
+          true
+        );
+        try {
+          trgMember = globalAvatar
+            ? await this.client.users.fetch(args.serverOrMember)
+            : msg.member;
+        } catch {
+          return msg.channel.send(
+            `${EMOJIS.ERROR} There was an error finding that user.`
+          );
+        }
+      } else {
+        trgMember = args.serverOrMember;
+      }
+      iconURL = (trgMember.user ? trgMember.user : trgMember).displayAvatarURL({
         format: 'png',
         dynamic: true,
         size: 2048,
@@ -55,7 +72,12 @@ class AvatarCommand extends Command {
       .setColor(embedColor)
       .setTitle(isGuild ? 'Icon URL' : 'Avatar URL')
       .setURL(iconURL)
-      .setAuthor(isGuild ? currGuild.name : trgMember.user.tag, iconURL)
+      .setAuthor(
+        isGuild
+          ? currGuild.name
+          : (trgMember.user ? trgMember.user : trgMember).tag,
+        iconURL
+      )
       .setImage(iconURL);
 
     return msg.channel.send(iconEmbed);
