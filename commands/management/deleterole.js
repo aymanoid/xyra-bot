@@ -49,7 +49,7 @@ class DeleteRoleCommand extends Command {
     }
 
     return msg.channel.send(
-      `${EMOJIS.SUCCESS} \`${deletedRole.name}\` role has been deleted.`
+      `${EMOJIS.CHECKED} \`${deletedRole.name}\` role has been deleted.`
     );
   }
 }

@@ -70,7 +70,7 @@ class SoftbanCommand extends Command {
         throw err;
       }
       return msg.channel.send(
-        `${EMOJIS.SUCCESS} **\`${bannedMember.user.tag}\` has been softbanned \`|\`** ${reason}`
+        `${EMOJIS.CHECKED} **\`${bannedMember.user.tag}\` has been softbanned \`|\`** ${reason}`
       );
     }
     try {
@@ -88,7 +88,7 @@ class SoftbanCommand extends Command {
 
     const bannedUser = (await msg.guild.fetchBan(args.member)).user;
     return msg.channel.send(
-      `${EMOJIS.SUCCESS} **\`${bannedUser.tag}\` has been softbanned \`|\`** ${reason}`
+      `${EMOJIS.CHECKED} **\`${bannedUser.tag}\` has been softbanned \`|\`** ${reason}`
     );
   }
 }

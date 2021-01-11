@@ -47,7 +47,7 @@ class UnbanCommand extends Command {
     }
 
     return msg.channel.send(
-      `${EMOJIS.SUCCESS} **\`${unbannedUser.tag}\` has been unbanned \`|\`** ${reason}`
+      `${EMOJIS.CHECKED} **\`${unbannedUser.tag}\` has been unbanned \`|\`** ${reason}`
     );
   }
 }

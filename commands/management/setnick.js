@@ -58,7 +58,7 @@ class SetNickCommand extends Command {
     }
 
     return msg.channel.send(
-      `${EMOJIS.SUCCESS} \`${editedMember.user.tag}\`'s nickname has been changed to \`${editedMember.nickname}\`.`
+      `${EMOJIS.CHECKED} \`${editedMember.user.tag}\`'s nickname has been changed to \`${editedMember.nickname}\`.`
     );
   }
 }

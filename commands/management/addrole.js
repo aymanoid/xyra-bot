@@ -50,7 +50,7 @@ class AddRoleCommand extends Command {
     }
 
     return msg.channel.send(
-      `${EMOJIS.SUCCESS} \`${addedRole.name}\` role has been added.`
+      `${EMOJIS.CHECKED} \`${addedRole.name}\` role has been added.`
     );
   }
 }

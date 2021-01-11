@@ -27,7 +27,7 @@ class GhostPingCommand extends Command {
     if (args.channel === 'disable') {
       await this.client.settings.set(msg.guild, 'ghostPingChannel', null);
       return msg.channel.send(
-        `${EMOJIS.SUCCESS}  The ghost ping has been disabled in this server.`
+        `${EMOJIS.CHECKED}  The ghost ping has been disabled in this server.`
       );
     }
     if (!args.channel)
@@ -40,7 +40,7 @@ class GhostPingCommand extends Command {
     );
     return msg.channel.send(
       `${
-        EMOJIS.SUCCESS
+        EMOJIS.CHECKED
       } ${args.channel.toString()} has been set as the ghost ping channel.`
     );
   }

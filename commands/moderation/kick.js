@@ -65,7 +65,7 @@ class KickCommand extends Command {
       throw err;
     }
     return msg.channel.send(
-      `${EMOJIS.SUCCESS} **\`${kickedMember.user.tag}\` has been kicked \`|\`** ${reason}`
+      `${EMOJIS.CHECKED} **\`${kickedMember.user.tag}\` has been kicked \`|\`** ${reason}`
     );
   }
 }

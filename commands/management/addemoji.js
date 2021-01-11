@@ -87,7 +87,7 @@ class AddEmojiCommand extends Command {
 
       return finalMsg.edit(
         `${
-          EMOJIS.SUCCESS
+          EMOJIS.CHECKED
         } \`${emojiName}\` emoji has been added. ${emoji.toString()}`
       );
     }

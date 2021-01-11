@@ -58,7 +58,7 @@ class RoleNameCommand extends Command {
     }
 
     return msg.channel.send(
-      `${EMOJIS.SUCCESS} \`${editedRole.name}\` role has been edited.`
+      `${EMOJIS.CHECKED} \`${editedRole.name}\` role has been edited.`
     );
   }
 }
