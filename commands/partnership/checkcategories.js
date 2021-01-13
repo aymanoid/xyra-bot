@@ -59,7 +59,7 @@ class CheckCategoriesCommand extends Command {
           let validCount = 0;
           let memberCount = 0;
 
-          for (let a = 0; a < inviteLinks.length; a += 1) {
+          for (let a = 0; a < inviteCount; a += 1) {
             let inv;
             try {
               inv = await this.client.fetchInvite(inviteLinks[a]);
