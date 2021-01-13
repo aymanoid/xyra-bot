@@ -55,7 +55,7 @@ class CheckCategoriesCommand extends Command {
             /(https?:\/\/)?(www\.)?(discord\.(gg)|discordapp\.com\/invite)\/.+[a-zA-Z0-9]/g
           );
 
-          const inviteCount = inviteLinks.length;
+          const inviteCount = inviteLinks ? inviteLinks.length : 0;
           let validCount = 0;
           let memberCount = 0;
 
