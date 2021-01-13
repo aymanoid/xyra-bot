@@ -82,12 +82,34 @@ class CheckCategoriesCommand extends Command {
           channelCount += 1;
         }
 
+        const chks = [];
+        chks.push('');
+        let n = 0;
+        for (let x = 0; x < checkInfo.length; x += 1) {
+          chks[n] += `${checkInfo[x]}\n`;
+          if (chks[n].length > 2048) {
+            chks[n] = chks[n].replace(`${checkInfo[x]}\n`, '');
+            chks.push('');
+            n += 1;
+            x -= 1;
+          }
+        }
+
         const categoryEmbed = new MessageEmbed()
           .setColor(embedColor)
           .setTitle(`The ${categoryChannel.name} category`)
-          .setDescription(checkInfo.join('\n'));
+          .setDescription(chks[0]);
 
         await msg.channel.send(categoryEmbed);
+
+        if (chks.length > 1) {
+          for (let y = 1; y < chks.length; y += 1) {
+            const embed = new MessageEmbed()
+              .setColor(embedColor)
+              .setDescription(chks[y]);
+            await msg.channel.send(embed);
+          }
+        }
       }
 
       categoryCount += 1;
