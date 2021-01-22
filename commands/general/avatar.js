@@ -18,7 +18,7 @@ class AvatarCommand extends Command {
         {
           id: 'serverOrMember',
           match: 'content',
-          type: Argument.union(['server', 'guild'], 'member', 'userMentionG'),
+          type: Argument.union(['server', 'guild'], 'memberOrGlobalUser'),
           default: (msg) => msg.member,
         },
       ],
@@ -31,40 +31,34 @@ class AvatarCommand extends Command {
 
     let isGuild = false;
     let iconURL;
-    let trgMember;
+    let trgUser;
 
-    if (args.serverOrMember === 'server' || args.serverOrMember === 'guild') {
+    if (typeof args.serverOrMember === 'string') {
       if (!currGuild.iconURL())
         return msg.channel.send(`${EMOJIS.ERROR} This server has no icon set.`);
       isGuild = true;
       iconURL = currGuild.iconURL({
         format: 'png',
         dynamic: true,
-        size: 2048,
+        size: 4096,
       });
     } else {
-      if (typeof args.serverOrMember === 'string') {
-        const globalAvatar = this.client.settings.get(
-          msg.guild,
-          'globalAvatar',
-          true
+      trgUser = args.serverOrMember.guild
+        ? args.serverOrMember.user
+        : args.serverOrMember;
+      const globalAvatar = this.client.settings.get(
+        msg.guild,
+        'globalAvatar',
+        true
+      );
+      if (!args.serverOrMember.guild && !globalAvatar)
+        return msg.channel.send(
+          `${EMOJIS.ERROR} The global avatar setting is disabled. Server managers can toggle this setting using the \`globalavatar\` command.`
         );
-        try {
-          trgMember = globalAvatar
-            ? await this.client.users.fetch(args.serverOrMember)
-            : msg.member;
-        } catch {
-          return msg.channel.send(
-            `${EMOJIS.ERROR} There was an error finding that user.`
-          );
-        }
-      } else {
-        trgMember = args.serverOrMember;
-      }
-      iconURL = (trgMember.user ? trgMember.user : trgMember).displayAvatarURL({
+      iconURL = trgUser.displayAvatarURL({
         format: 'png',
         dynamic: true,
-        size: 2048,
+        size: 4096,
       });
     }
 
@@ -72,12 +66,7 @@ class AvatarCommand extends Command {
       .setColor(embedColor)
       .setTitle(isGuild ? 'Icon URL' : 'Avatar URL')
       .setURL(iconURL)
-      .setAuthor(
-        isGuild
-          ? currGuild.name
-          : (trgMember.user ? trgMember.user : trgMember).tag,
-        iconURL
-      )
+      .setAuthor(isGuild ? currGuild.name : trgUser.tag, iconURL)
       .setImage(iconURL);
 
     return msg.channel.send(iconEmbed);
