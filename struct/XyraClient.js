@@ -97,6 +97,26 @@ class XyraClient extends AkairoClient {
       return id[1] || null;
     });
 
+    this.commandHandler.resolver.addType(
+      'memberOrGlobalUser',
+      async (message, phrase) => {
+        if (!phrase) return null;
+        if (message.guild) {
+          const memberType = this.commandHandler.resolver.type('member');
+          const member = memberType(message, phrase);
+          if (member) return member;
+        }
+        const id =
+          phrase.match(/<@!?(\d{17,19})>/) || phrase.match(/^(\d{17,19})$/);
+        if (!id) return null;
+        try {
+          return await this.users.fetch(id[1]);
+        } catch {
+          return null;
+        }
+      }
+    );
+
     this.inhibitorHandler = new InhibitorHandler(this, {
       directory: path.join(__dirname, '..', 'inhibitors'),
     });
