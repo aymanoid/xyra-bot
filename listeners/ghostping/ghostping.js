@@ -10,22 +10,28 @@ class GhostPingListener extends Listener {
   }
 
   async exec(member) {
-    const ghostPingChannelID = this.client.settings.get(
+    const ghostPingChannelIDS = await this.client.settings.get(
       member.guild.id,
-      'ghostPingChannel'
+      'ghostPingChannels',
+      []
     );
-    if (!ghostPingChannelID) return;
+    if (!ghostPingChannelIDS.length) return;
 
-    const ghostPingChannel = this.client.channels.cache.get(ghostPingChannelID);
-    if (
-      !ghostPingChannel ||
-      !ghostPingChannel.viewable ||
-      !ghostPingChannel.postable
-    )
-      return;
+    for (let i = 0; i < ghostPingChannelIDS.length; i += 1) {
+      const ghostPingChannel = this.client.channels.cache.get(
+        ghostPingChannelIDS[i]
+      );
+      if (
+        !ghostPingChannel ||
+        !ghostPingChannel.viewable ||
+        !ghostPingChannel.postable
+      )
+        return;
 
-    const ghostPingMsg = await ghostPingChannel.send(member.toString());
-    ghostPingMsg.delete();
+      // eslint-disable-next-line no-await-in-loop
+      const ghostPingMsg = await ghostPingChannel.send(member.toString());
+      ghostPingMsg.delete();
+    }
   }
 }
 
