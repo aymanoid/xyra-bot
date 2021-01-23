@@ -5,7 +5,7 @@ class GhostPingListener extends Listener {
     super('ghostping', {
       event: 'guildMemberAdd',
       emitter: 'client',
-      category: 'ghostping',
+      category: 'general',
     });
   }
 
