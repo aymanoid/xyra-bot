@@ -22,15 +22,14 @@ class GhostPingListener extends Listener {
         ghostPingChannelIDS[i]
       );
       if (
-        !ghostPingChannel ||
-        !ghostPingChannel.viewable ||
-        !ghostPingChannel.postable
-      )
-        return;
-
-      // eslint-disable-next-line no-await-in-loop
-      const ghostPingMsg = await ghostPingChannel.send(member.toString());
-      ghostPingMsg.delete();
+        ghostPingChannel &&
+        ghostPingChannel.viewable &&
+        ghostPingChannel.postable
+      ) {
+        // eslint-disable-next-line no-await-in-loop
+        const ghostPingMsg = await ghostPingChannel.send(member.toString());
+        ghostPingMsg.delete();
+      }
     }
   }
 }
