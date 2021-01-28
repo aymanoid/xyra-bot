@@ -1,5 +1,6 @@
 import { Command } from 'discord-akairo';
 import parse from 'parse-duration';
+import moment from 'moment';
 import { EMOJIS } from '../../util/Constants';
 
 class ExplodingMessagesCommand extends Command {
@@ -64,10 +65,17 @@ class ExplodingMessagesCommand extends Command {
       explodingChannels
     );
 
+    const durationString = moment
+      .duration(duration)
+      .format(
+        'y [years], M [months], d [days], h [hours], m [minutes], s [seconds]',
+        { largest: 2 }
+      );
+
     return msg.channel.send(
       `${
         EMOJIS.CHECKED
-      } Messages sent in ${args.channel.toString()} will now be deleted after ${duration}ms.`
+      } Messages sent in ${args.channel.toString()} will now be deleted after ${durationString}.`
     );
   }
 }
