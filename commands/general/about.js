@@ -34,7 +34,7 @@ class AboutCommand extends Command {
       .setThumbnail(avatarURL)
       .addField(
         'Creator',
-        this.client.users.cache.get(this.client.ownerID).tag,
+        this.client.users.cache.get(this.client.ownerID[0]).tag,
         true
       )
       .addField('Library', 'discord.js', true)
