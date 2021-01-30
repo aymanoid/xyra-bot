@@ -1,7 +1,7 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
-import { table } from 'table';
+import Table from 'easy-table';
 
 class BoostersCommand extends Command {
   constructor() {
@@ -40,9 +40,7 @@ class BoostersCommand extends Command {
       .filter((m) => m.premiumSince)
       .sort((a, b) => a.premiumSince - b.premiumSince);
 
-    const boostersTableData = [
-      ['**Username**', '**Boosting Since**', '**Boosting For**'],
-    ];
+    const t = new Table();
 
     sortedBoosters.forEach((booster) => {
       const username = booster.user.tag;
@@ -54,10 +52,13 @@ class BoostersCommand extends Command {
           { largest: 3 }
         );
 
-      boostersTableData.push([username, boostingSince, boostingFor]);
+      t.cell('**Username**', username);
+      t.cell('**Boosting Since**', boostingSince);
+      t.cell('**Boosting For**', boostingFor);
+      t.newRow();
     });
 
-    const tableText = table(boostersTableData);
+    const tableText = t.toString();
     boostersEmbed
       .setDescription(tableText)
       .setFooter(
