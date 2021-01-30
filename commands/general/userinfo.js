@@ -150,8 +150,24 @@ class UserInfoCommand extends Command {
           moment(trgMember.user.createdAt).format('lll z'),
           true
         )
-        .addField('Account Age', accountAge, true)
-        .addField('\u200B', '\u200B', true)
+        .addField('Account Age', accountAge, true);
+
+      if (trgMember.premiumSince) {
+        const premiumAge = moment
+          .duration(moment().diff(trgMember.premiumSince))
+          .format(
+            'y [years], M [months], d [days], h [hours], m [minutes], s [seconds]',
+            { largest: 2 }
+          );
+        const premiumSince = moment(trgMember.premiumSince).format('lll z');
+        const boosterSince = `${premiumSince} (${premiumAge} ago)`;
+
+        userInfoEmbed.addField('Booster Since', boosterSince, true);
+      } else {
+        userInfoEmbed.addField('\u200B', '\u200B', true);
+      }
+
+      userInfoEmbed
         .addField(
           'Joined Server On',
           moment(trgMember.joinedAt).format('lll z'),
