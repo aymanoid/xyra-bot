@@ -52,7 +52,7 @@ class BoostersCommand extends Command {
         );
 
       boostersList.push(
-        `\`${userMention}\`\nBoosting for \`${boostingFor}\` since \`${boostingSince}\``
+        `${userMention}\nBoosting for \`${boostingFor}\` since \`${boostingSince}\``
       );
     });
 
