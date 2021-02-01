@@ -1,7 +1,6 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
 import moment from 'moment';
-import Table from 'easy-table';
 
 class BoostersCommand extends Command {
   constructor() {
@@ -40,10 +39,10 @@ class BoostersCommand extends Command {
       .filter((m) => m.premiumSince)
       .sort((a, b) => a.premiumSince - b.premiumSince);
 
-    const t = new Table();
+    const boostersList = [];
 
     sortedBoosters.forEach((booster) => {
-      const username = booster.user.tag;
+      const userMention = booster.toString();
       const boostingSince = moment(booster.premiumSince).format('lll z');
       const boostingFor = moment
         .duration(moment().diff(booster.premiumSince))
@@ -52,15 +51,13 @@ class BoostersCommand extends Command {
           { largest: 3 }
         );
 
-      t.cell('**Username**', username);
-      t.cell('**Boosting Since**', boostingSince);
-      t.cell('**Boosting For**', boostingFor);
-      t.newRow();
+      boostersList.push(
+        `\`${userMention}\`\nBoosting for \`${boostingFor}\` since \`${boostingSince}\``
+      );
     });
 
-    const tableText = t.toString();
     boostersEmbed
-      .setDescription(tableText)
+      .setDescription(boostersList.join('\n'))
       .setFooter(
         `There's a total of ${sortedBoosters.size} members boosting this server for a total of ${currGuild.premiumSubscriptionCount} boosts.`
       );
