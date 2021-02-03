@@ -67,22 +67,24 @@ class UserInfoCommand extends Command {
       }[trgMember.presence.status];
 
       const statusIcons = [];
-      if (trgMember.presence.clientStatus.web)
-        statusIcons.push(
-          EMOJIS[`WEB_${trgMember.presence.clientStatus.web.toUpperCase()}`]
-        );
-      if (trgMember.presence.clientStatus.mobile)
-        statusIcons.push(
-          EMOJIS[
-            `MOBILE_${trgMember.presence.clientStatus.mobile.toUpperCase()}`
-          ]
-        );
-      if (trgMember.presence.clientStatus.desktop)
-        statusIcons.push(
-          EMOJIS[
-            `DESKTOP_${trgMember.presence.clientStatus.desktop.toUpperCase()}`
-          ]
-        );
+      if (trgMember.presence.clientStatus) {
+        if (trgMember.presence.clientStatus.web)
+          statusIcons.push(
+            EMOJIS[`WEB_${trgMember.presence.clientStatus.web.toUpperCase()}`]
+          );
+        if (trgMember.presence.clientStatus.mobile)
+          statusIcons.push(
+            EMOJIS[
+              `MOBILE_${trgMember.presence.clientStatus.mobile.toUpperCase()}`
+            ]
+          );
+        if (trgMember.presence.clientStatus.desktop)
+          statusIcons.push(
+            EMOJIS[
+              `DESKTOP_${trgMember.presence.clientStatus.desktop.toUpperCase()}`
+            ]
+          );
+      }
       const statusIcon = statusIcons.length
         ? statusIcons.join(' ')
         : EMOJIS.OFFLINE;
