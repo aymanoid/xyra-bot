@@ -14,7 +14,7 @@ class XyraClient extends AkairoClient {
   constructor() {
     super(
       {
-        ownerID: ['772377509928370178', '785203119607775312'],
+        ownerID: ['772377509928370178'],
       },
       {
         messageCacheMaxSize: 50,
