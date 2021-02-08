@@ -2,19 +2,18 @@ import { Command } from 'discord-akairo';
 import { EMOJIS } from '../../util/Constants';
 import CommandHelp from '../../util/CommandHelp';
 
-class BanCommand extends Command {
+class ForceBanCommand extends Command {
   constructor() {
-    super('ban', {
-      aliases: ['ban'],
+    super('forceban', {
+      aliases: ['forceban', 'fban'],
       description: {
-        content: 'Bans a member from the server.',
+        content: 'Force bans a member.',
         usage: '<member> [reason]',
         examples: ['@Clyde deserved'],
       },
-      category: 'moderation',
+      category: 'private',
+      ownerOnly: true,
       channel: 'guild',
-      clientPermissions: ['BAN_MEMBERS'],
-      userPermissions: ['BAN_MEMBERS'],
       args: [
         {
           id: 'member',
@@ -63,6 +62,17 @@ class BanCommand extends Command {
           days: deleteMessageDays,
           reason,
         });
+        const forceBanned = await this.client.settings.get(
+          msg.guild.id,
+          'forceBanned',
+          []
+        );
+        forceBanned.push({ id: trgMember.id, reason });
+        await this.client.settings.set(
+          msg.guild.id,
+          'forceBanned',
+          forceBanned
+        );
       } catch (err) {
         msg.channel.send(
           `${EMOJIS.ERROR} There was an error banning the user.`
@@ -78,6 +88,13 @@ class BanCommand extends Command {
         days: deleteMessageDays,
         reason,
       });
+      const forceBanned = await this.client.settings.get(
+        msg.guild.id,
+        'forceBanned',
+        []
+      );
+      forceBanned.push({ id: args.member.id, reason });
+      await this.client.settings.set(msg.guild.id, 'forceBanned', forceBanned);
     } catch (err) {
       msg.channel.send(`${EMOJIS.ERROR} There was an error banning the user.`);
       throw err;
@@ -90,4 +107,4 @@ class BanCommand extends Command {
   }
 }
 
-export default BanCommand;
+export default ForceBanCommand;
