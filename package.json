@@ -1,6 +1,6 @@
 {
   "name": "xyra-bot",
-  "version": "1.30.21b1",
+  "version": "2.8.21b1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "@sentry/node": "^5.27.6",
     "@zuzak/owo": "^1.14.0",
+    "algoliasearch": "^4.8.4",
     "axios": "^0.21.0",
     "chalk": "^4.1.0",
     "cheerio": "^1.0.0-rc.3",
