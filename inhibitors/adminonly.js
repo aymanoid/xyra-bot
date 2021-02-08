@@ -8,6 +8,6 @@ export default class AdminOnlyInhibitor extends Inhibitor {
   }
 
   exec(msg) {
-    return !msg.guild.me.permissions.has('ADMINISTRATOR');
+    return msg.guild ? !msg.guild.me.permissions.has('ADMINISTRATOR') : false;
   }
 }
