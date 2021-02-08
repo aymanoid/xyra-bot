@@ -33,11 +33,11 @@ class JoinAnnounceListener extends Listener {
       };
 
       let joinMsg = message
-        .replaceAll('{user}', member.toString())
-        .replaceAll('{tag}', member.user.tag)
-        .replaceAll('{server}', member.guild.name)
-        .replaceAll('{membercount}', member.guild.memberCount)
-        .replaceAll('{ordinalmembercount}', ordinal(member.guild.memberCount));
+        .replace(/{user}/g, member.toString())
+        .replace(/{tag}/g, member.user.tag)
+        .replace(/{server}/g, member.guild.name)
+        .replace(/{membercount}/g, member.guild.memberCount)
+        .replace(/{ordinalmembercount}/g, ordinal(member.guild.memberCount));
 
       const channelRegex = /{#([^}]+)}/g;
       const roleRegex = /{@([^}]+)}/g;
@@ -50,7 +50,7 @@ class JoinAnnounceListener extends Listener {
           member.guild.channels.cache
         );
         if (trgChannel)
-          joinMsg = joinMsg.replaceAll(arr[0], trgChannel.toString());
+          joinMsg = joinMsg.replace(arr[0], trgChannel.toString());
       }
 
       while ((arr = roleRegex.exec(joinMsg)) !== null) {
@@ -58,7 +58,7 @@ class JoinAnnounceListener extends Listener {
           arr[1],
           member.guild.roles.cache
         );
-        if (trgRole) joinMsg = joinMsg.replaceAll(arr[0], trgRole.toString());
+        if (trgRole) joinMsg = joinMsg.replace(arr[0], trgRole.toString());
       }
 
       while ((arr = emojiRegex.exec(joinMsg)) !== null) {
@@ -66,7 +66,7 @@ class JoinAnnounceListener extends Listener {
           arr[1],
           member.guild.emojis.cache
         );
-        if (trgEmoji) joinMsg = joinMsg.replaceAll(arr[0], trgEmoji.toString());
+        if (trgEmoji) joinMsg = joinMsg.replace(arr[0], trgEmoji.toString());
       }
 
       return joinMsg;

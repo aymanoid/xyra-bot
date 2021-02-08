@@ -36,11 +36,11 @@ class JoinMessageCommand extends Command {
       };
 
       let joinMsg = message
-        .replaceAll('{user}', msg.member.toString())
-        .replaceAll('{tag}', msg.author.tag)
-        .replaceAll('{server}', msg.guild.name)
-        .replaceAll('{membercount}', msg.guild.memberCount)
-        .replaceAll('{ordinalmembercount}', ordinal(msg.guild.memberCount));
+        .replace(/{user}/g, msg.member.toString())
+        .replace(/{tag}/g, msg.author.tag)
+        .replace(/{server}/g, msg.guild.name)
+        .replace(/{membercount}/g, msg.guild.memberCount)
+        .replace(/{ordinalmembercount}/g, ordinal(msg.guild.memberCount));
 
       const channelRegex = /{#([^}]+)}/g;
       const roleRegex = /{@([^}]+)}/g;
@@ -53,7 +53,7 @@ class JoinMessageCommand extends Command {
           msg.guild.channels.cache
         );
         if (trgChannel)
-          joinMsg = joinMsg.replaceAll(arr[0], trgChannel.toString());
+          joinMsg = joinMsg.replace(arr[0], trgChannel.toString());
       }
 
       while ((arr = roleRegex.exec(joinMsg)) !== null) {
@@ -61,7 +61,7 @@ class JoinMessageCommand extends Command {
           arr[1],
           msg.guild.roles.cache
         );
-        if (trgRole) joinMsg = joinMsg.replaceAll(arr[0], trgRole.toString());
+        if (trgRole) joinMsg = joinMsg.replace(arr[0], trgRole.toString());
       }
 
       while ((arr = emojiRegex.exec(joinMsg)) !== null) {
@@ -69,7 +69,7 @@ class JoinMessageCommand extends Command {
           arr[1],
           msg.guild.emojis.cache
         );
-        if (trgEmoji) joinMsg = joinMsg.replaceAll(arr[0], trgEmoji.toString());
+        if (trgEmoji) joinMsg = joinMsg.replace(arr[0], trgEmoji.toString());
       }
 
       return joinMsg;
