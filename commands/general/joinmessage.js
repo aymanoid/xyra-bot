@@ -1,5 +1,7 @@
 /* eslint-disable no-cond-assign */
 import { Command } from 'discord-akairo';
+import parse from 'parse-duration';
+import moment from 'moment';
 import { EMOJIS } from '../../util/Constants';
 
 class JoinMessageCommand extends Command {
@@ -9,13 +11,26 @@ class JoinMessageCommand extends Command {
       description: {
         content: 'Edit the announce channel for joins.',
         usage: '<new message>',
-        examples: ['Welcome {tag} to {server}!', 'off', 'on', 'test', 'remove'],
+        examples: [
+          'Welcome {tag} to {server}!',
+          'off',
+          'on',
+          'test',
+          'remove',
+          'duration 30s',
+        ],
       },
       category: 'general',
       channel: 'guild',
       clientPermissions: ['MANAGE_GUILD'],
       userPermissions: ['MANAGE_GUILD'],
       args: [
+        {
+          id: 'a1',
+        },
+        {
+          id: 'a2',
+        },
         {
           id: 'text',
           match: 'content',
@@ -79,7 +94,7 @@ class JoinMessageCommand extends Command {
       const joinMessage = await this.client.settings.get(
         msg.guild.id,
         'joinMessage',
-        { enabled: false, message: 'Welcome {tag} to {server}!' }
+        { enabled: false, message: 'Welcome {tag} to {server}!', duration: 0 }
       );
       joinMessage.enabled = false;
       await this.client.settings.set(msg.guild.id, 'joinMessage', joinMessage);
@@ -92,7 +107,7 @@ class JoinMessageCommand extends Command {
       const joinMessage = await this.client.settings.get(
         msg.guild.id,
         'joinMessage',
-        { enabled: false, message: 'Welcome {tag} to {server}!' }
+        { enabled: false, message: 'Welcome {tag} to {server}!', duration: 0 }
       );
       joinMessage.enabled = true;
       await this.client.settings.set(msg.guild.id, 'joinMessage', joinMessage);
@@ -105,7 +120,7 @@ class JoinMessageCommand extends Command {
       const joinMessage = await this.client.settings.get(
         msg.guild.id,
         'joinMessage',
-        { enabled: false, message: 'Welcome {tag} to {server}!' }
+        { enabled: false, message: 'Welcome {tag} to {server}!', duration: 0 }
       );
       return msg.channel.send(processMessage(joinMessage.message));
     }
@@ -114,12 +129,47 @@ class JoinMessageCommand extends Command {
       const joinMessage = await this.client.settings.get(
         msg.guild.id,
         'joinMessage',
-        { enabled: false, message: 'Welcome {tag} to {server}!' }
+        { enabled: false, message: 'Welcome {tag} to {server}!', duration: 0 }
       );
       joinMessage.message = 'Welcome {tag} to {server}!';
       await this.client.settings.set(msg.guild.id, 'joinMessage', joinMessage);
       return msg.channel.send(
         `${EMOJIS.CHECKED} The join message has been reset.`
+      );
+    }
+
+    if (args.a1 === 'duration') {
+      let duration = [0, '0', 'delete', 'remove'].includes(args.a2)
+        ? 0
+        : parse(args.duration);
+      if (duration !== 0 && !duration)
+        return msg.channel.send(
+          `${EMOJIS.ERROR} The duration doen't seem valid.`
+        );
+      if (duration > 604800000) duration = 604800000;
+
+      if (duration === 0)
+        return msg.channel.send(
+          `${EMOJIS.CHECKED} Join messages will no longer be automatically deleted.`
+        );
+
+      const joinMessage = await this.client.settings.get(
+        msg.guild.id,
+        'joinMessage',
+        { enabled: false, message: 'Welcome {tag} to {server}!', duration: 0 }
+      );
+      joinMessage.duration = duration;
+      await this.client.settings.set(msg.guild.id, 'joinMessage', joinMessage);
+
+      const durationString = moment
+        .duration(duration)
+        .format(
+          'y [years], M [months], d [days], h [hours], m [minutes], s [seconds]',
+          { largest: 2 }
+        );
+
+      return msg.channel.send(
+        `${EMOJIS.CHECKED} The join messages will now be automatically deleted after ${durationString}.`
       );
     }
 

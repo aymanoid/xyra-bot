@@ -21,7 +21,7 @@ class JoinAnnounceListener extends Listener {
     const joinMessage = await this.client.settings.get(
       member.guild.id,
       'joinMessage',
-      { enabled: false, message: 'Welcome {tag} to {server}!' }
+      { enabled: false, message: 'Welcome {tag} to {server}!', duration: 0 }
     );
     if (!joinMessage.enabled || !joinMessage.message) return;
 
@@ -78,8 +78,14 @@ class JoinAnnounceListener extends Listener {
       announceChannel.viewable &&
       announceChannel.postable
     ) {
-      // eslint-disable-next-line no-await-in-loop
-      await announceChannel.send(processMessage(joinMessage.message));
+      const trgMsg = await announceChannel.send(
+        processMessage(joinMessage.message)
+      );
+      if (joinMessage.duration > 0) {
+        setTimeout(() => {
+          if (!trgMsg.deleted) trgMsg.delete();
+        }, joinMessage.duration);
+      }
     }
   }
 }
