@@ -148,11 +148,6 @@ class JoinMessageCommand extends Command {
         );
       if (duration > 604800000) duration = 604800000;
 
-      if (duration === 0)
-        return msg.channel.send(
-          `${EMOJIS.CHECKED} Join messages will no longer be automatically deleted.`
-        );
-
       const joinMessage = await this.client.settings.get(
         msg.guild.id,
         'joinMessage',
@@ -160,6 +155,11 @@ class JoinMessageCommand extends Command {
       );
       joinMessage.duration = duration;
       await this.client.settings.set(msg.guild.id, 'joinMessage', joinMessage);
+
+      if (duration === 0)
+        return msg.channel.send(
+          `${EMOJIS.CHECKED} Join messages will no longer be automatically deleted.`
+        );
 
       const durationString = moment
         .duration(duration)
