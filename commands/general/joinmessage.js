@@ -141,7 +141,7 @@ class JoinMessageCommand extends Command {
     if (args.a1 === 'duration') {
       let duration = [0, '0', 'delete', 'remove'].includes(args.a2)
         ? 0
-        : parse(args.duration);
+        : parse(args.a2);
       if (duration !== 0 && !duration)
         return msg.channel.send(
           `${EMOJIS.ERROR} The duration doen't seem valid.`
