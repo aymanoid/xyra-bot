@@ -1,6 +1,6 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
-import * as paginationEmbed from 'discord.js-pagination';
+import paginationEmbed from 'discord.js-pagination';
 import moment from 'moment';
 import _ from 'lodash';
 
