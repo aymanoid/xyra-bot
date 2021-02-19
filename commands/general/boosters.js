@@ -68,7 +68,7 @@ class BoostersCommand extends Command {
           .setColor(embedColor)
           .setAuthor(currGuild.name, iconURL)
           .setTitle(
-            `${sortedBoosters.size} Boosters | ${currGuild.premiumSubscriptionCount} Boosts.`
+            `${sortedBoosters.size} Boosters | ${currGuild.premiumSubscriptionCount} Boosts`
           )
           .setDescription(boosterChk.join('\n'))
       );
