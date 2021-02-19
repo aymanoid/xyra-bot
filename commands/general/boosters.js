@@ -1,6 +1,8 @@
 import { Command } from 'discord-akairo';
 import { MessageEmbed } from 'discord.js';
+import * as paginationEmbed from 'discord.js-pagination';
 import moment from 'moment';
+import _ from 'lodash';
 
 class BoostersCommand extends Command {
   constructor() {
@@ -56,13 +58,23 @@ class BoostersCommand extends Command {
       );
     });
 
-    boostersEmbed
-      .setDescription(boostersList.join('\n'))
-      .setFooter(
-        `There's a total of ${sortedBoosters.size} members boosting this server for a total of ${currGuild.premiumSubscriptionCount} boosts.`
-      );
+    const boosterChks = _.chunk(boostersList, 10);
 
-    return msg.channel.send(boostersEmbed);
+    const pages = [];
+
+    boosterChks.forEach((boosterChk) => {
+      pages.push(
+        new MessageEmbed()
+          .setColor(embedColor)
+          .setAuthor(currGuild.name, iconURL)
+          .setTitle(
+            `${sortedBoosters.size} Boosters | ${currGuild.premiumSubscriptionCount} Boosts.`
+          )
+          .setDescription(boosterChk.join('\n'))
+      );
+    });
+
+    return paginationEmbed(msg, pages);
   }
 }
 
